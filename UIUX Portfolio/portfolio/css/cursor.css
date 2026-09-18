@@ -1,0 +1,80 @@
+
+/* ================= Custom Cursor ================= */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  transition: opacity 0.2s ease;
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--red);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.cursor-ring .cursor-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #FFF9F8;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+
+.cursor-ring .cursor-label {
+  color: #FFFAFA;
+}
+
+.cursor-ring .cursor-label svg {
+  display: block;
+}
+
+
+/* ---- state: hovering a link, button ---- */
+.cursor-ring.is-hover {
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: 3px solid #FFF9F8;
+  box-shadow: 0 0 0 2px var(--red);
+}
+.cursor-dot.is-hover { opacity: 0; }
+
+/* ---- state: hovering an image (hero / work cards) ---- */
+.cursor-ring.is-view {
+  width: 90px;
+  height: 90px;
+  background: var(--red);
+  border-color: transparent;
+}
+.cursor-ring.is-view .cursor-label { opacity: 1; }
+
+/* ---- disable the whole custom cursor on touch devices, keep native cursor ---- */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+}

@@ -1,0 +1,1512 @@
+/* ===== Design tokens ===== */
+:root {
+  --cream: #F5EFED;
+  --red: #D64550;
+  --quad-start: 1ms;      /* first block starts almost instantly */
+  --quad-duration: 299ms; /* each block takes 299ms to turn red */
+
+  --ink: #1A181B;
+  --title: #504E4F;
+  --muted: #878383;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream); }
+
+
+
+
+/* ========== SCROLL REVEAL ============ */
+:root {
+  --reveal-duration: 0.8s;
+  --reveal-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --reveal-distance: 28px;
+}
+
+.reveal {
+  opacity: 0 !important;
+  transform: translateY(var(--reveal-distance)) scale(0.985);
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal[data-reveal="fade"] {
+  transform: scale(0.99);
+}
+
+.reveal[data-reveal="left"] {
+  transform: translateX(calc(-1 * var(--reveal-distance)));
+}
+
+.reveal[data-reveal="right"] {
+  transform: translateX(var(--reveal-distance));
+}
+
+.reveal.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none !important;
+    opacity: 0 !important;
+  }
+
+  .reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---- Cards that also have their own hover-background transition:
+   restore the reveal opacity/transform animation alongside it, since
+   a plain "transition: background ..." on the same element would
+   otherwise replace (not merge with) the reveal transition above. ---- */
+.reveal.cs-process-item,
+.reveal.cs-finding-item,
+.reveal.cs-empathy-block,
+.reveal.cs-typography-card,
+.reveal.cs-colors-card,
+.reveal.cs-lessons-item,
+.reveal.cs-persona-block {
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease),
+    background 0.2s ease-in-out;
+  transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s;
+}
+
+
+
+
+/* ================= Glass sweep effect ================= */
+.glass-sweep { position: relative; overflow: hidden; }
+
+.glass-sweep::after {
+  content: "";
+  position: absolute;
+  top: -150%;
+  left: -70%;
+  width: 17.5%;
+  height: 400%;
+
+  background: linear-gradient(
+    120deg,
+    rgba(245, 239, 237, 0) 0%,
+    rgba(245, 239, 237, 0.12) 30%,
+    rgba(245, 239, 237, 0.35) 45%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(245, 239, 237, 0.35) 55%,
+    rgba(245, 239, 237, 0.12) 70%,
+    rgba(245, 239, 237, 0) 100%
+  );
+
+  transform: rotate(35deg);
+  pointer-events: none;
+}
+
+.glass-sweep:hover::after {
+  animation: glass-shine 1.2s ease-in-out;
+}
+
+@keyframes glass-shine {
+  from { left: -60%; }
+  to   { left: 140%; }
+}
+
+
+
+
+
+
+
+
+
+/* ================= Nav Bar (identical to homepage) ================= */
+.navbar {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  padding-bottom: 50px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.navbar .logo { display: block; }
+.navbar .logo img { height: 48px; width: auto; display: block; }
+
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a { color: var(--ink); text-decoration: none; font-weight: 500; }
+.nav-links .count { color: var(--red); }
+.nav-links a:hover { color: var(--red); }
+
+/* ===== Buttons ===== */
+.btn {
+  font-family: 'manrope', sans-serif;
+  display: inline-block;
+  padding: 14px 28px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary { background: var(--red); color: #FFF9F8; }
+.btn-primary:hover { background: #C33F49; transition: background 0.2s ease-in-out; }
+
+
+
+/* ================= Case Study Hero ================= */
+.cs-hero {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 0;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding-bottom: 40px;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.cs-hero-title-accent {
+  color: var(--red);
+}
+
+/* ================= Case Study Hero Image ================= */
+.cs-hero-image {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+  height: 650px;
+  overflow: hidden;
+}
+ 
+.cs-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+ 
+.cs-hero-image:hover img {
+  transform: scale(1.04);
+}
+
+
+
+
+
+
+
+/* ================= Product Overview ================= */
+.cs-overview{
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 0;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+/* ================= Shared type tokens (size/weight/color only) ================= */
+.cs-section-title {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--red);
+  margin: 0 0 16px;
+}
+
+.cs-subheading {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--red);
+  margin: 24px 0 8px;
+}
+
+.cs-body {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.cs-bullet-list {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.cs-bullet-list li {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+/* ---- Product Overview: full-width text (your current values) ---- */
+.cs-overview .cs-section-title { width: 1280px; line-height: 1.15; }
+.cs-overview .cs-body          { width: 1280px; max-width: 1280px; line-height: 1.5; }
+.cs-overview .cs-bullet-list   { max-width: 1280px; }
+.cs-overview .cs-bullet-list li{ max-width: 1280px; line-height: 1.7; }
+
+
+
+
+/* ================= Quick Stats bar ================= */
+.cs-stats {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+  background: #FAF4F2;
+}
+
+.cs-stat {
+  flex: 1;
+  padding: 40px 40px;
+  border-left: 1px solid #EFCDCE;
+}
+
+.cs-stat:first-child { border-left: none; }
+
+
+.cs-stats :hover{
+  background: #FFFAFA;
+}
+
+
+.cs-stat-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+.cs-stat-value {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+
+
+
+
+
+/* ================= Problem Statement ================= */
+.cs-problem {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-problem-text {
+  flex: 1 1 692px;      
+  max-width: 692px;     
+}
+
+.cs-problem-graphic {
+  flex: 0 0 540px;       
+  width: 540px;
+}
+.cs-problem-graphic img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ---- Problem Statement: its own text rhythm, independent from Overview ---- */
+.cs-problem .cs-section-title { line-height: 1.15; }
+.cs-problem .cs-subheading    { line-height: 1.5; }
+.cs-problem .cs-body          { max-width: 692px; line-height: 1.5; }
+.cs-problem .cs-bullet-list   { max-width: 692px; }
+.cs-problem .cs-bullet-list li{ line-height: 1.5; }
+
+
+
+
+
+
+
+/* ================= Possible Solution ================= */
+.cs-solution {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 50px 0;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-solution-image {
+  flex: 0 0 540px;
+  width: 540px;
+  overflow: hidden;
+}
+
+.cs-solution-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.cs-solution-image:hover img {
+  transform: scale(1.05);
+}
+
+.cs-solution-text { flex: 1 1 auto; }
+
+/* ---- Solution section: its own text rhythm ---- */
+.cs-solution .cs-section-title { line-height: 1.15; }
+.cs-solution .cs-body          { max-width: 620px; line-height: 1.6; }
+.cs-solution .cs-bullet-list   { max-width: 620px; }
+.cs-solution .cs-bullet-list li{ line-height: 1.6; }
+
+
+
+
+
+
+
+/* ================= Design Process ================= */
+.cs-process {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 0 16px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-process-grid {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-process-item {
+  padding: 28px;
+  border-right: 1px solid #EFCDCE;
+  border-bottom: 1px solid #EFCDCE;
+  background: #FAF4F2;
+  transition: background 0.2s ease-in-out;
+}
+
+.cs-process-item:hover { background: #FFFAFA; }
+
+.cs-process-grid .cs-process-item:nth-child(3n) { border-right: none; }
+.cs-process-grid .cs-process-item:nth-child(n+4) { border-bottom: none; }
+
+.cs-process-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.cs-process-number {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--red);
+  color: #FFF9F8;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.cs-process-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--title);
+  margin: 0;
+}
+
+.cs-process-desc {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 100%;
+  margin: 0;
+}
+
+
+
+
+
+/* ================= User Research ================= */
+.cs-research {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 100px;
+  padding-bottom: 24px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-research .cs-body        { max-width: 900px; line-height: 1.5; }
+.cs-research .cs-bullet-list { max-width: 900px; }
+.cs-research .cs-bullet-list li { line-height: 1.6; }
+
+.cs-findings-heading { 
+  margin-top: 24px;
+  margin-bottom: 0; 
+}
+
+/* ================= Key Findings grid ================= */
+.cs-findings-grid {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-finding-item {
+  padding: 28px;
+  border-right: 1px solid #EFCDCE;
+  border-bottom: 1px solid #EFCDCE;
+  background: #FAF4F2;
+  transition: background 0.2s ease-in-out;
+}
+
+.cs-finding-item:hover { background: #FFFAFA; }
+
+.cs-findings-grid .cs-finding-item:nth-child(2n) { border-right: none; }
+
+.cs-findings-grid .cs-finding-item:nth-child(5),
+.cs-findings-grid .cs-finding-item:nth-child(6) {
+  border-bottom: none;
+}
+
+.cs-finding-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.cs-finding-icon {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  color: var(--red); /* inline SVG hole kaje lagbe */
+}
+
+.cs-finding-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--title);
+  margin: 0;
+}
+
+.cs-finding-desc {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 100%;
+  margin: 0;
+}
+
+
+
+
+
+
+
+/* ================= Competitive Analysis ================= */
+.cs-compare {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 32px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-compare .cs-body {
+  max-width: 100%;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---- Table wrapper (bordered container, matches site grid pattern) ---- */
+.cs-compare-table-wrap {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+  overflow-x: auto;
+}
+
+.cs-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* ---- Header row ---- */
+.cs-compare-table thead th {
+  background: var(--red);
+  color: #FFF9F8;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  padding: 20px 16px;
+  border-right: 1px solid rgba(255, 249, 248, 0.2);
+  border-bottom: 1px solid rgba(255, 249, 248, 0.2);
+}
+
+.cs-compare-table thead th:last-child { border-right: none; }
+
+.cs-compare-corner {
+  text-align: left !important;
+  padding-left: 24px !important;
+}
+
+/* ---- Row labels (first column) ---- */
+.cs-compare-table tbody th {
+  background: var(--red);
+  color: #FFF9F8;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 249, 248, 0.2);
+}
+
+.cs-compare-table tbody tr:last-child th { border-bottom: none; }
+
+/* ---- Data cells ---- */
+.cs-compare-table tbody td {
+  background: var(--cream);
+  text-align: center;
+  padding: 20px 16px;
+  background: #FAF4F2;
+  border-right: 1px solid #EFCDCE;
+  border-bottom: 1px solid #EFCDCE;
+  transition: background 0.2s ease-in-out;
+}
+
+.cs-compare-table tbody td:last-child { border-right: none; }
+.cs-compare-table tbody tr:last-child td { border-bottom: none; }
+
+.cs-compare-table tbody td:hover { background: #FFFAFA; }
+
+/* ---- Yes / No text ---- */
+.cs-yes,
+.cs-no {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cs-yes { color: #2E7D4F; }
+.cs-no  { color: var(--red); }
+
+
+
+
+
+
+
+
+/* ================= User Persona ================= */
+.cs-persona {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 32px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-persona .cs-body {
+  max-width: 100%;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---- Grid shell: image + 4 cards forming one rectangle ---- */
+.cs-persona-grid {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+/* ---- Image cell (row 1, col 1) ---- */
+.cs-persona-image {
+  border-right: 1px solid #EFCDCE;
+  border-bottom: 1px solid #EFCDCE;
+  overflow: hidden;
+}
+
+.cs-persona-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.cs-persona-image:hover img { transform: scale(1.04); }
+
+/* ---- Side column (row 1, col 2): Goals + Pain Points stacked ---- */
+.cs-persona-side {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #EFCDCE;
+}
+
+.cs-persona-goals { 
+  border-bottom: 1px solid #EFCDCE; 
+}
+
+/* ---- Shared card block styling ---- */
+.cs-persona-block {
+  padding: 24px;
+  transition: background 0.2s ease-in-out;
+  background: #FAF4F2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cs-persona-block:hover { background: #FFFAFA; }
+
+.cs-persona-side .cs-persona-block { flex: 1; }
+
+.cs-persona-heading {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--red);
+  margin: 0 0 12px;
+}
+
+.cs-persona-block .cs-bullet-list { margin: 0; }
+.cs-persona-block .cs-bullet-list li {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+.cs-persona-block .cs-bullet-list li:last-child { margin-bottom: 0; }
+
+/* ---- Intro cell (row 2, col 1) ---- */
+.cs-persona-intro { 
+  border-right: 1px solid #EFCDCE; 
+}
+
+.cs-persona-details { margin: 0; }
+
+.cs-persona-detail-row {
+  display: flex;
+  gap: 12px;
+  font-size: 16px;
+  color: var(--muted);
+  padding: 2px 0;
+}
+
+.cs-persona-detail-row dt {
+  flex: 0 0 110px;
+  font-weight: 600;
+  color: var(--title);
+}
+
+.cs-persona-detail-row dd { margin: 0; }
+
+/* ---- Background cell (row 2, col 2) ---- */
+.cs-persona-background .cs-body {
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 100%;
+}
+
+
+
+
+
+
+
+/* ================= User Empathy Map ================= */
+.cs-empathy {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 32px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-empathy .cs-body {
+  max-width: 100%;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---- Grid shell: 3 cols (left | image-width gap | right), 3 rows ---- */
+.cs-empathy-grid {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr 250px 1fr;
+  grid-template-rows: auto 250px auto;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+/* ---- Quadrant cards ---- */
+.cs-empathy-block {
+  padding: 24px;
+  min-height: 100%;
+  background: #FAF4F2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background 0.2s ease-in-out;
+}
+
+.cs-empathy-block:hover { background: #FFFAFA; }
+
+.cs-empathy-thinks { 
+  grid-column: 1; 
+  grid-row: 1; 
+  border-right: 1px solid #EFCDCE; 
+  border-bottom: 1px solid #EFCDCE; 
+  border-top: 1px solid #EFCDCE; 
+}
+
+.cs-empathy-says { 
+  grid-column: 3; 
+  grid-row: 1; 
+  border-left:  1px solid #EFCDCE; 
+  border-bottom: 1px solid #EFCDCE; 
+  border-top: 1px solid #EFCDCE; 
+}
+
+.cs-empathy-does { 
+  grid-column: 1; 
+  grid-row: 3; 
+  border-right: 1px solid #EFCDCE; 
+  border-top: 1px solid #EFCDCE; 
+  border-bottom: 1px solid #EFCDCE; 
+}
+
+.cs-empathy-feels { 
+  grid-column: 3; 
+  grid-row: 3; 
+  border-left:  1px solid #EFCDCE; 
+  border-top: 1px solid #EFCDCE; 
+  border-bottom: 1px solid #EFCDCE; 
+}
+
+.cs-empathy-heading {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--red);
+  margin: 0 0 12px;
+}
+
+.cs-empathy-block .cs-bullet-list { margin: 0; }
+.cs-empathy-block .cs-bullet-list li {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+.cs-empathy-block .cs-bullet-list li:last-child { margin-bottom: 0; }
+
+/* ---- Middle-column spacers: keep the horizontal lines continuous ---- */
+.cs-empathy-spacer-top    { grid-column: 2; grid-row: 1; border-bottom: 1px solid #EFCDCE; }
+.cs-empathy-spacer-bottom { grid-column: 2; grid-row: 3; border-top:    1px solid #EFCDCE; }
+
+/* ---- Center image (row 2, middle column, exactly 250x250) ---- */
+.cs-empathy-image-wrap {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-empathy-image {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.cs-empathy-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.cs-empathy-image:hover img { transform: scale(1.04); }
+
+
+
+
+
+
+
+
+/* ================= Typography ================= */
+.cs-typography {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 32px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-typography .cs-body {
+  max-width: 100%;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---- Card rectangle: hover applies here, not on the image ---- */
+.cs-typography-card {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 32px;
+  background: #FAF4F2;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+  transition: background 0.2s ease-in-out;
+}
+
+.cs-typography-card:hover { background: #FFFAFA; }
+
+/* ---- Image: sits inside with the 32px margin from card padding ---- */
+.cs-typography-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+
+
+
+/* ================= Used Colors ================= */
+.cs-colors {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 32px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-colors .cs-body {
+  max-width: 100%;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---- Grid shell: cards capped at max-width, fixed gap between ---- */
+.cs-colors-grid {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  gap: 94px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+/* ---- Card: hover applies here, not on the image ---- */
+.cs-colors-card {
+  max-width: 374px;
+  width: 100%;
+  padding: 32px;
+  border: 1px solid #EFCDCE;
+  border-top: none;
+  border-bottom: none;
+  background: #FAF4F2;
+  transition: background 0.2s ease-in-out;
+}
+
+.cs-colors-card:hover { background: #FFFAFA; }
+.cs-colors-card:first-child { border-left: none; }
+
+/* ---- Title ---- */
+.cs-colors-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--title);
+  margin: 0 0 16px;
+}
+
+/* ---- Image ---- */
+.cs-colors-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+
+
+/* ================= Mid-Fidelity Wireframe ================= */
+.cs-wireframe {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 32px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-wireframe .cs-body {
+  max-width: 100%;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---- Wrapper: holds the single wireframe image, no hover, no gap ---- */
+.cs-wireframe-wrap {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+  overflow: hidden;
+}
+
+.cs-wireframe-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+
+
+
+/* ================= User Interface ================= */
+.cs-ui {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 32px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-ui .cs-body {
+  max-width: 100%;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---- Row: screen + text side by side, alternating direction ---- */
+.cs-ui-row {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: stretch;
+  gap: 40px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-ui-row-reverse { flex-direction: row-reverse; }
+
+/* ---- Screen (image) ---- */
+.cs-ui-screen {
+  flex: 0 0 639.5px;
+  width: 639.5px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.cs-ui-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Text column ---- */
+.cs-ui-text {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cs-ui-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cs-ui-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--red);
+  flex: 0 0 auto;
+}
+
+.cs-ui-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--title);
+  margin: 0;
+}
+
+.cs-ui-desc {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+/* ================= What This Project Taught Me ================= */
+.cs-lessons {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 0 16px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+  text-align: center;
+}
+
+.cs-lessons-title { margin: 0 0 12px; }
+
+/* ---- Grid: 3 columns, vertical divider lines ---- */
+.cs-lessons-grid {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.cs-lessons-item {
+  padding: 28px;
+  border-right: 1px solid #EFCDCE;
+  background: #FAF4F2;
+  transition: background 0.2s ease-in-out;
+}
+
+.cs-lessons-item:last-child { border-right: none; }
+.cs-lessons-item:last-child { border-left: 1px solid #EFCDCE; }
+
+.cs-lessons-item:hover { background: #FFFAFA; }
+
+/* ---- Number + title row ---- */
+.cs-lessons-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.cs-lessons-number {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--red);
+  color: #FFF9F8;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.cs-lessons-item-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--title);
+  margin: 0;
+}
+
+/* ---- Description ---- */
+.cs-lessons-desc {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+
+/* ================= Start A Project (Contact) ================= */
+.contact {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 100px;
+  padding-bottom: 0;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+  z-index: 2;     /* must be higher than .site-footer's z-index, otherwise the card's own z-index:2 has no effect (it only 
+                    applies inside this stacking context) and the later-in-DOM footer paints over the whole card */
+}
+
+.contact-header {
+  text-align: center;
+  margin: 0;
+}
+
+.contact-title {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--red);
+  margin: 0 0 16px;
+}
+
+.contact-subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 32px;
+  line-height: 1.5;
+}
+
+/* -------- full-bleed guide line -------- */
+.work-line-full {
+  width: 100vw;
+  height: 1px;
+  background: #EFCDCE;
+  margin-left: calc(50% - 50vw);
+}
+
+/* -------- floating card -------- */
+.contact-card {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px;
+  background: #FFF9F8;
+  border: 1px solid #EFCDCE;
+  box-shadow: 0 24px 50px rgba(26, 24, 27, 0.10);
+}
+
+.contact-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--title);
+  margin: 0 0 24px;
+}
+
+/* -------- form -------- */
+.contact-line {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 4px;
+}
+
+.contact-line--block {
+  margin-top: 24px;
+}
+
+.contact-input {
+  appearance: none;
+  border: none;
+  border-bottom: 1.5px solid rgba(214, 74, 80, 0.40);
+  background: transparent;
+  font-family: 'manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--title);
+  padding: 2px 2px 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.contact-input::placeholder {
+  color: rgba(214, 74, 80, 0.60);
+  font-weight: 500;
+}
+
+.contact-input:focus {
+  border-bottom-color: var(--red);
+}
+
+.contact-input--inline {
+  display: inline-block;
+  width: 220px;
+  max-width: 60%;
+  margin-left: 6px;
+  vertical-align: baseline;
+}
+
+.contact-input--block {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  resize: none;
+  overflow: hidden;
+}
+
+
+
+.contact-form-note {
+  min-height: 18px;
+  font-size: 13px;
+  margin: 16px 0 0;
+  color: var(--red);
+}
+
+.contact-form-note.is-success {
+  color: #2E8B57;
+}
+
+.contact-submit {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ================= Footer ================= */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  background: var(--red);
+  margin-top: -100px;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  border-left: 1px solid #EFCDCE;
+  border-right: 1px solid #EFCDCE;
+}
+
+.footer-top {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 32px;
+  padding-top: 168px;
+  padding-bottom: 80px;
+}
+
+.footer-heading {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #FFF9F8;
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.6);
+  display: inline-block;
+}
+
+/* -------- contacts column -------- */
+.footer-contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF9F8;
+  color: var(--red);
+}
+
+.footer-contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-contact-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 300;
+}
+
+.footer-contact-value {
+  font-size: 16px;
+  color: #FFF9F8;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.footer-contact-text:hover .footer-contact-value {
+  padding-left: 4px;
+  transition: padding-left 0.2s ease;
+}
+
+/* -------- quick links / social media columns -------- */
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links a {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: opacity 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-links a:hover {
+  opacity: 0.85;
+  padding-left: 4px;
+}
+
+/* -------- back-to-top button, pinned top-right of footer-top -------- */
+.footer-top-btn {
+  position: absolute;
+  top: 168px;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: #FFF9F8;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-top-btn:hover {
+  transform: rotate(-45deg);
+}
+
+/* -------- divider + bottom bar -------- */
+.footer-divider {
+  width: 100vw;
+  height: 1px;
+  background: #EFCDCE;
+  margin-left: calc(50% - 50vw);
+}
+
+.footer-bottom {
+  padding: 32px 0;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 14px;
+  color: #EFCDCE;
+}

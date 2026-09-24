@@ -19,8 +19,12 @@ const PROJECTS = [
 ];
 
 const TYPE_LABELS = { website: "Web", app: "App", dashboard: "Dashboard" };
-const INITIAL_COUNT = 9; 
-const LOAD_STEP = 3;     
+
+// Mobile (<=1024px): horizontal-scroll carousel replaces pagination,
+// so every filtered project loads upfront — no "Load More" needed.
+const IS_MOBILE_VIEW = window.matchMedia("(max-width: 1024px)").matches;
+const INITIAL_COUNT = IS_MOBILE_VIEW ? Infinity : 9;
+const LOAD_STEP = 3;
 
 const grid = document.getElementById("workGrid");
 const filterBtns = document.querySelectorAll(".filter-btn");
@@ -29,25 +33,14 @@ const loadMoreBtn = document.getElementById("loadMoreBtn");
 let activeFilter = "all";
 let visibleCount = INITIAL_COUNT;
 
-// Dynamic Count Update
 function updateFilterCounts() {
-  const counts = {
-    all: PROJECTS.length,
-    website: 0,
-    app: 0,
-    dashboard: 0
-  };
-
+  const counts = { all: PROJECTS.length, website: 0, app: 0, dashboard: 0 };
   PROJECTS.forEach((p) => {
-    if (counts[p.filterType] !== undefined) {
-      counts[p.filterType]++;
-    }
+    if (counts[p.filterType] !== undefined) counts[p.filterType]++;
   });
-
   filterBtns.forEach((btn) => {
     const filter = btn.dataset.filter;
     const countSpan = btn.querySelector(".count");
-    
     if (countSpan && counts[filter] !== undefined) {
       countSpan.textContent = `(${counts[filter]})`;
     }
@@ -85,11 +78,11 @@ function render() {
   const visible = filtered.slice(0, visibleCount);
   if (grid) {
     grid.innerHTML = visible.map(workCardTemplate).join("");
+    grid.scrollLeft = 0;
   }
   if (loadMoreBtn) {
     loadMoreBtn.style.display = visibleCount >= filtered.length ? "none" : "inline-block";
   }
-
   if (window.ScrollMotion) window.ScrollMotion.refresh();
 }
 
@@ -97,13 +90,10 @@ filterBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const currentBtn = e.target.closest(".filter-btn");
     if (!currentBtn || currentBtn.classList.contains("active")) return;
-
     filterBtns.forEach((b) => b.classList.remove("active"));
     currentBtn.classList.add("active");
-
     activeFilter = currentBtn.dataset.filter;
     visibleCount = INITIAL_COUNT;
-
     if (grid) {
       grid.classList.add("is-filtering");
       setTimeout(() => {
@@ -123,6 +113,5 @@ if (loadMoreBtn) {
   });
 }
 
-// Ensure execution after page elements load
 updateFilterCounts();
 render();

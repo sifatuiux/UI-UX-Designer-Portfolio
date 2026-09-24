@@ -1,3 +1,14 @@
+/* ============================================================
+   GLOBAL: prevent horizontal overflow across all devices
+   (root cause fix for the 100vw full-bleed line trick below)
+   ============================================================ */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+
 /* ===== Design tokens ===== */
 :root {
   --cream: #F5EFED;
@@ -304,6 +315,301 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 
 
 
+/* ============================================================
+   GLOBAL MOBILE TYPOGRAPHY SCALE
+   Used consistently across every mobile section.
+   ============================================================ */
+:root {
+  --mob-title: 28px;       /* Section Title: 26–28px */
+  --mob-card-title: 18px;  /* Card Title: 18–20px */
+  --mob-body: 15px;        /* Body Text: 14px */
+  --mob-level: 13px;       /* Level/meta Text: 12px */
+}
+
+
+/* mobile-only elements hidden by default (desktop-first markup) */
+.navbar-mobile,
+.mobile-menu,
+.hero-mobile { display: none; }
+
+/* ---- burger button (shared, styled here, only visible <=1024px) ---- */
+.burger-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  z-index: 60;
+}
+.burger-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--red);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.burger-btn.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.burger-btn.is-active span:nth-child(2) { opacity: 0; }
+.burger-btn.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+body.menu-open { overflow: hidden; }
+
+@media (max-width: 1024px) {
+
+  /* ---- swap desktop nav/hero out, mobile nav/hero in ---- */
+  .navbar,
+  .hero { display: none; }
+
+  .navbar-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 55;
+    padding: 20px 24px;
+    background: var(--cream);
+    border-left: 1px solid #EFCDCE;
+    border-right: 1px solid #EFCDCE;
+    border-bottom: 1px solid #EFCDCE;
+  }
+  .navbar-mobile .logo img { height: 36px; width: auto; display: block; }
+
+
+  /* ---- full-bleed guide lines: use 100% instead of 100vw on mobile
+  (100vw causes device-dependent overflow/shift — this is the fix) ---- */
+  .work-line-full,
+  .footer-divider {
+    width: 100%;
+    margin-left: 0;
+  }
+
+
+  /* ---- mobile dropdown menu: overlay wrapper ---- */
+  .mobile-menu {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .mobile-menu.is-open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* ---- backdrop: dims + blurs the untouched lower 50% ---- */
+  .mobile-menu-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 24, 27, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .mobile-menu.is-open .mobile-menu-backdrop {
+    opacity: 1;
+  }
+
+  /* ---- panel: top 50% height, gradient + texture ---- */
+ 
+  .mobile-menu-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 45%;
+    background:
+      radial-gradient(120% 140% at 100% 0%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 55%),
+      linear-gradient(155deg, #E2545E 0%, var(--red) 45%, #BE3D47 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 28px 60px rgba(26, 24, 27, 0.28);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+    transform: translateY(-100%);
+    transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .mobile-menu.is-open .mobile-menu-panel {
+    transform: translateY(0);
+  }
+
+  .mobile-menu-links {
+    position: relative;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* ---- menu links: Works / Services — full width rows ---- */
+  .mobile-menu-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 4px;
+    color: #fafafa;
+    text-decoration: none;
+    font-size: var(--mob-body-lg, 16px);
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .mobile-menu-links li:last-child .mobile-menu-link {
+    border-bottom: none;
+  }
+
+  .mobile-menu-link:active {
+    opacity: 0.75;
+  }
+
+  .mobile-menu-link .count {
+    color: #fafafa;
+    font-size: var(--mob-level);
+    font-weight: 500;
+  }
+
+  .mobile-menu-contact {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--cream);
+    color: var(--red);
+    font-size: var(--mob-body-lg, 16px);
+    font-weight: 500;
+    padding: 14px 26px;
+    margin-top: 4px;
+  }
+
+
+
+  /* ---- mobile hero ---- */
+  .hero-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 40px 24px 60px;
+    border-left: 1px solid #EFCDCE;
+    border-right: 1px solid #EFCDCE;
+  }
+
+  .hero-mobile-heading img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .hero-mobile-subheading { margin-top: -6px; }
+  .hero-mobile-subheading img {
+    display: block;
+    width: auto;
+    max-width: 65%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .hero-mobile-image {
+    position: relative;
+    aspect-ratio: 440 / 462;
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--cream);
+    border: 1px solid #EFCDCE;
+    overflow: hidden;
+  }
+  .hero-mobile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-mobile-content {
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .hero-mobile-content .hero-intro-lead {
+    font-size: var(--mob-body);
+    margin-bottom: 8px;
+  }
+  .hero-mobile-content .hero-intro-text {
+    font-size: var(--mob-body);
+  }
+
+  .hero-mobile-btns { display: flex; justify-content: center; }
+
+  .hero-mobile-stats {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    color: var(--muted);
+    font-size: var(--mob-level);
+    padding-top: 8px;
+    border-top: 1px solid #EFCDCE;
+  }
+
+  /* simple entrance animation for hero-mobile (no scroll dependency) */
+  .hero-mobile > * {
+    animation: heroMobileIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .hero-mobile > *:nth-child(1) { animation-delay: 0ms; }
+  .hero-mobile > *:nth-child(2) { animation-delay: 80ms; }
+  .hero-mobile > *:nth-child(3) { animation-delay: 160ms; }
+  .hero-mobile > *:nth-child(4) { animation-delay: 240ms; }
+  .hero-mobile > *:nth-child(5) { animation-delay: 320ms; }
+  .hero-mobile > *:nth-child(6) { animation-delay: 400ms; }
+}
+
+@keyframes heroMobileIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .navbar-mobile { padding: 16px 20px; }
+  .hero-mobile { padding: 32px 20px 48px; gap: 22px; }
+  .hero-mobile-heading img { max-width: 92%; }
+  .hero-mobile-subheading img { max-width: 55%; }
+  .hero-mobile-stats { gap: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mobile > * { animation: none !important; }
+  .mobile-menu,
+  .mobile-menu-backdrop,
+  .mobile-menu-panel { transition: none !important; }
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -457,6 +763,104 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   opacity: 0;
   transform: translateY(8px);
 }
+
+
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — SELECTED WORKS (horizontal card carousel)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .work {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  .work-header { padding: 0 24px; }
+
+  .work-title-main {
+    font-size: var(--mob-title);
+    margin: 0 0 12px;
+  }
+
+  .work-subtitle {
+    font-size: var(--mob-body);
+    margin: 0 auto 20px;
+  }
+
+  /* ---- filters: horizontal scroll row, centered when it fits ---- */
+  .work-filters {
+    flex-wrap: nowrap;
+    justify-content: safe center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 22px;
+    padding: 0 24px 4px;
+    margin: 0 -24px;
+  }
+  .work-filters::-webkit-scrollbar { display: none; }
+
+  .filter-btn {
+    flex-shrink: 0;
+    font-size: var(--mob-body);
+    white-space: nowrap;
+  }
+  .filter-btn .count {
+    font-size: var(--mob-level);
+  }
+
+  /* ---- card grid -> horizontal snap carousel ---- */
+  .work-grid {
+    display: flex;
+    grid-template-columns: unset;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 16px;
+    margin-left: 20px;
+    margin-top: 20px;
+    box-sizing: border-box;
+  }
+  .work-grid::-webkit-scrollbar { display: none; }
+
+  .work-card {
+    flex: 0 0 78%;
+    max-width: 78%;
+    box-sizing: border-box;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .work-title {
+    font-size: var(--mob-card-title);
+  }
+
+  .work-category {
+    font-size: var(--mob-body);
+    padding-top: 6px;
+  }
+
+  .work-actions {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .work-card {
+    flex: 0 0 82%;
+    max-width: 82%;
+  }
+  .work-grid {
+    gap: 16px;
+
+  }
+  .work-header { padding: 0 20px; }
+  .work-filters { padding: 0 20px 4px; margin: 0 -20px; gap: 18px; }
+}
+
 
 
 
@@ -724,6 +1128,152 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   display: block;
   text-align: center;
   width: 100%;
+}
+
+
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — SERVICES I PROVIDE
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .services {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  .services-header { padding: 0 24px; margin-bottom: 32px; }
+
+  .services-title-main {
+    font-size: var(--mob-title);
+    margin: 0 0 12px;
+  }
+
+  .services-subtitle {
+    font-size: var(--mob-body);
+  }
+
+  /* ---- item: desktop's single hover-row -> tap card ---- */
+  .service-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 14px;
+    height: auto;
+    padding: 20px clamp(20px, 5vw, 24px);
+  }
+
+  .service-number {
+    grid-column: 1;
+    font-size: var(--mob-card-title);
+    width: auto;
+    color: var(--red); /* always red on mobile, no hover dependency */
+  }
+
+  .service-info {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+  }
+
+  .service-title {
+    font-size: var(--mob-card-title);
+    white-space: normal;
+  }
+
+  /* description removed entirely on mobile — modal shows full detail */
+  .service-desc {
+    display: none;
+  }
+
+  .service-arrow {
+    grid-column: 3;
+    width: 34px;
+    height: 34px;
+  }
+
+  /* ---- active state: card turns red like desktop hover,
+     stays red while its modal is open, resets on close ---- */
+  .service-item.is-active {
+    background: var(--red);
+  }
+  .service-item.is-active .service-number,
+  .service-item.is-active .service-title {
+    color: var(--cream);
+  }
+  .service-item.is-active .service-arrow {
+    background: var(--cream);
+    color: var(--red);
+  }
+
+  /* remove desktop's mouse :hover effect entirely on touch/mobile widths */
+  .service-item:hover {
+    background: transparent;
+  }
+  .service-item:hover .service-number {
+    color: var(--red);
+  }
+  .service-item:hover .service-title {
+    color: var(--title);
+  }
+  .service-item:hover .service-arrow {
+    background: var(--red);
+    color: var(--cream);
+  }
+
+  .services-cta {
+    margin-top: 40px;
+  }
+
+  /* ---- service modal: mobile-friendly type scale ---- */
+  .service-modal {
+    padding: 20px;
+  }
+
+  .service-modal-panel {
+    padding: 24px 20px;
+    max-height: 80vh;
+  }
+
+  .service-modal-number {
+    font-size: var(--mob-card-title);
+  }
+
+  .service-modal-title {
+    font-size: var(--mob-title);
+    margin: 0 0 8px;
+  }
+
+  .service-modal-desc {
+    font-size: var(--mob-body);
+  }
+
+  .service-modal-label {
+    font-size: var(--mob-level);
+  }
+
+  .service-modal-list li {
+    font-size: var(--mob-body);
+  }
+}
+
+@media (max-width: 480px) {
+  .services-header { padding: 0 20px; }
+
+  .service-item {
+    padding: 18px 20px;
+    column-gap: 12px;
+  }
+
+  .service-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .service-modal-panel {
+    padding: 20px 16px;
+  }
 }
 
 
@@ -1044,6 +1594,73 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 
 
 
+/* ============================================================
+   MOBILE RESPONSIVE — WORKING PROCESS (vertical stacked cards)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .process {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .process-header { padding: 0 24px; margin-bottom: 32px; }
+
+  .process-title-main {
+    font-size: var(--mob-title);
+    margin: 0 0 12px;
+  }
+
+  .process-subtitle {
+    font-size: var(--mob-body);
+  }
+
+  /* -------- grid: 3 columns -> single vertical stack -------- */
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 clamp(20px, 5vw, 24px);
+  }
+
+  .process-card {
+    height: auto;
+  }
+
+  .process-image {
+    aspect-ratio: 411 / 240;
+  }
+
+  .process-body {
+    padding: 20px;
+  }
+
+  .process-title-row {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .process-number {
+    width: 34px;
+    height: 34px;
+    font-size: var(--mob-body);
+  }
+
+  .process-title {
+    font-size: var(--mob-card-title);
+  }
+
+  .process-desc {
+    font-size: var(--mob-body);
+  }
+}
+
+@media (max-width: 480px) {
+  .process-header { padding: 0 20px; }
+  .process-grid { padding: 0 20px; gap: 16px; }
+  .process-body { padding: 16px; }
+}
+
+
 
 
 
@@ -1181,6 +1798,68 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 }
 
 
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — LOGO MARQUEE (tools we use)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .logo-marquee {
+    height: 90px;
+  }
+
+  .marquee-group {
+    gap: 60px;
+    padding-right: 60px;
+  }
+
+  .logo-item {
+    gap: 12px;
+  }
+
+  .logo-item img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .logo-item span {
+    font-size: var(--mob-card-title);
+  }
+
+  /* faster loop so the smaller/lighter content doesn't feel sluggish */
+  .marquee-track {
+    animation-duration: 20s;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-marquee {
+    height: 72px;
+  }
+
+  .marquee-group {
+    gap: 40px;
+    padding-right: 40px;
+  }
+
+  .logo-item {
+    gap: 10px;
+  }
+
+  .logo-item img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .logo-item span {
+    font-size: var(--mob-body);
+  }
+
+  .marquee-track {
+    animation-duration: 16s;
+  }
+}
 
 
 
@@ -1382,6 +2061,166 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 }
 .testimonials-counter-total { color: var(--muted); font-weight: 500; }
 
+
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — TESTIMONIALS
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .testimonials {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  .testimonials-header {
+    padding: 0 clamp(20px, 5vw, 24px);
+    margin-bottom: 28px;
+  }
+
+  .testimonials-title-main {
+    font-size: var(--mob-title);
+    margin: 0 0 10px;
+  }
+
+  .testimonials-subtitle {
+    font-size: var(--mob-body);
+  }
+
+  /* ---- stats: keep all 3 on a single line, no wrap ---- */
+  .testimonials-stats {
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 22px;
+  }
+
+  .testimonials-stat .stat-nums {
+    font-size: var(--mob-title);
+  }
+
+  .stat-label {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* ---- track: same horizontal-scroll pattern as Selected Works ---- */
+  .testimonials-track {
+    gap: 16px;
+    padding: 0 clamp(20px, 5vw, 24px);
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: clamp(20px, 5vw, 24px);
+  }
+
+  .testimonial-card {
+    flex: 0 0 78%;
+    width: 78%;
+    height: auto;
+    min-height: 320px;
+    padding: 20px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .testimonial-top {
+    margin-bottom: 28px;
+  }
+
+  .testimonial-index {
+    font-size: var(--mob-level);
+  }
+
+  .testimonial-quote-icon {
+    margin-bottom: 24px;
+  }
+
+  .testimonial-text {
+    font-size: var(--mob-body);
+  }
+
+  .testimonial-divider {
+    margin: 16px 0;
+  }
+
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .testimonial-name {
+    font-size: var(--mob-body);
+  }
+
+  .testimonial-role {
+    font-size: var(--mob-level);
+  }
+
+  /* ---- tap state (touch equivalent of desktop hover) ----
+     background turns red, everything inside turns cream/white.
+     (quote-icon color is handled separately in JS via src swap,
+     since it's an <img>, not styleable with CSS color.) */
+  .testimonial-card:hover {
+    background: #FFF9F8;
+  }
+  .testimonial-card:hover .testimonial-index,
+  .testimonial-card:hover .testimonial-stars,
+  .testimonial-card:hover .testimonial-text,
+  .testimonial-card:hover .testimonial-name {
+    color: inherit;
+  }
+  .testimonial-card:hover .testimonial-role { color: var(--muted); }
+  .testimonial-card:hover .testimonial-divider { background: #EFCDCE; }
+
+  .testimonial-card.is-active {
+    background: var(--red);
+  }
+  .testimonial-card.is-active .testimonial-index,
+  .testimonial-card.is-active .testimonial-stars,
+  .testimonial-card.is-active .testimonial-text,
+  .testimonial-card.is-active .testimonial-name,
+  .testimonial-card.is-active .testimonial-role {
+    color: #FFF9F8 !important;
+  }
+  .testimonial-card.is-active .testimonial-divider {
+    background: rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* nav arrows */
+  .testimonials-nav {
+    display: none;
+  }
+   /* ----
+  .testimonials-nav-btn {
+    width: 40px;
+    height: 40px;
+  }  
+
+  .testimonials-counter {
+    font-size: var(--mob-body);
+  }    ----*/
+}
+
+@media (max-width: 480px) {
+  .testimonial-card {
+    flex: 0 0 84%;
+    width: 84%;
+    min-height: 300px;
+    padding: 18px;
+  }
+
+  .testimonials-stats {
+    gap: 16px;
+  }
+
+  .testimonials-stat .stat-nums {
+    font-size: var(--mob-card-title);
+  }
+
+  .stat-label {
+    font-size: var(--mob-level);
+  }
+}
 
 
 
@@ -1769,6 +2608,139 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 
 
 
+/* ============================================================
+   MOBILE RESPONSIVE — ABOUT THE DESIGNER
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .about {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  .about-inner { padding: 0 clamp(20px, 5vw, 24px); }
+
+  .about-header { margin-bottom: 32px; }
+
+  .about-title {
+    font-size: var(--mob-title);
+    margin: 0 0 12px;
+  }
+
+  .about-intro {
+    font-size: var(--mob-body);
+  }
+
+  /* ---- content: photo stacked above panel ---- */
+  .about-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+  }
+
+  .about-photo {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    aspect-ratio: 513 / 483;
+    margin: 0 auto;
+  }
+
+  .about-panel {
+    flex: none;
+    width: 100%;
+  }
+
+  /* ---- tabs ---- */
+    .tabs {
+    gap: 20px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tabs-item {
+    font-size: var(--mob-body);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tabs-count {
+    font-size: var(--mob-level);
+  }
+
+  /* ---- cards ---- */
+  .cards {
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .card {
+    max-width: 100%;
+    min-height: auto;
+    padding: 16px;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    border-right: 1px solid #EFCDCE;
+  }
+
+  .card-title {
+    font-size: var(--mob-body);
+    white-space: normal;
+  }
+
+  .card-sub {
+    font-size: var(--mob-level);
+    white-space: normal;
+  }
+
+  .card-meta {
+    font-size: var(--mob-level);
+    width: 100%;
+    padding-left: 28px; /* aligns under card-text, past the marker */
+  }
+
+  /* ---- resume button: centered ---- */
+  .about-panel #viewResumeBtn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  /* ---- modals: fit mobile width ---- */
+  .modal { padding: 16px; }
+
+  .modal-box--cert,
+  .modal-box--resume {
+    max-width: 100%;
+  }
+
+  .modal-title {
+    font-size: var(--mob-card-title);
+  }
+
+  .modal-resume-frame {
+    height: 65vh;
+  }
+
+  .resume-btn--download {
+    align-self: center;
+    font-size: var(--mob-body);
+  }
+}
+
+@media (max-width: 480px) {
+  .about-inner { padding: 0 20px; }
+  .about-photo { max-width: 100%; }
+  .card { padding: 14px; }
+  .card-meta { padding-left: 24px; }
+}
+
+
+
+
+
 
 /* =============== ABOUT — CARD POP MOTION ====================== */
 
@@ -2090,3 +3062,155 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   color: #EFCDCE;
 }
 
+
+
+
+
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — CONTACT (Start A Project) + FOOTER
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  /* ---- contact ---- */
+  .contact {
+    padding-top: 60px;
+  }
+
+  .contact-header {
+    padding: 0 clamp(20px, 5vw, 24px);
+    margin-bottom: 36px;
+  }
+
+  .contact-title {
+    font-size: var(--mob-title);
+    margin: 0 0 12px;
+  }
+
+  .contact-subtitle {
+    font-size: var(--mob-body);
+  }
+
+  .contact-card {
+    max-width: calc(100% - clamp(40px, 10vw, 48px));
+    padding: 28px clamp(20px, 5vw, 24px);
+  }
+
+  .contact-card-title {
+    font-size: var(--mob-card-title);
+    margin: 0 0 20px;
+  }
+
+  .contact-line {
+    font-size: var(--mob-body);
+  }
+
+  .contact-input {
+    font-size: var(--mob-body);
+  }
+
+  .contact-input--inline {
+    width: 180px;
+  }
+
+  .contact-form-note {
+    font-size: var(--mob-level);
+  }
+
+  .contact-submit {
+    font-size: var(--mob-body);
+  }
+
+  /* ---- overlap effect: footer's top line meets the card's bottom,
+     same illusion as desktop, re-tuned for the card's mobile height.
+     Adjust --footer-overlap below if the alignment drifts on your device. */
+  .site-footer {
+    --footer-overlap: 77px;
+    margin-top: calc(-1 * var(--footer-overlap));
+  }
+
+  .footer-top {
+    padding-top: calc(var(--footer-overlap) + 48px);
+    padding-bottom: 56px;
+  }
+
+  /* ---- footer columns: 2-col on tablet, Contacts spans full width ---- */
+  .footer-inner {
+    padding-left: clamp(20px, 5vw, 24px);
+    padding-right: clamp(20px, 5vw, 24px);
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
+  }
+
+  .footer-col--contacts {
+    grid-column: 1 / -1; /* Contacts spans both columns on its own row */
+  }
+
+  .footer-heading {
+    font-size: var(--mob-card-title);
+  }
+
+  .footer-contact-label {
+    font-size: var(--mob-level);
+  }
+
+  .footer-contact-value {
+    font-size: var(--mob-body);
+  }
+
+  .footer-links a {
+    font-size: var(--mob-body);
+  }
+
+  /* ---- back-to-top: move out of absolute top-right corner
+     (would collide with stacked columns), place after the columns ---- */
+  .footer-top-btn {
+    position: static;
+    margin-top: 8px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom p {
+    font-size: var(--mob-level);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-card {
+    max-width: calc(100% - 40px);
+    padding: 24px 20px;
+  }
+
+  .contact-input--inline {
+    width: 140px;
+    max-width: 55%;
+  }
+
+  .footer-inner {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .site-footer {
+    --footer-overlap: 72px;
+  }
+
+  .footer-top {
+    padding-top: calc(var(--footer-overlap) + 40px);
+    padding-bottom: 44px;
+  }
+
+  /* ---- footer columns: back to single column on small phones ---- */
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-col--contacts {
+    grid-column: auto;
+  }
+}

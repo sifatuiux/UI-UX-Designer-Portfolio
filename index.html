@@ -14,7 +14,7 @@
 
 <body>
 
-  <!-- ================= Nav Bar (red box, top) ================= -->
+    <!-- ================= Nav Bar (desktop) ================= -->
   <nav class="navbar">
     <a href="index.html" class="logo"><img src="images/hero/Hero Logo.svg" alt="IISifat"></a>
     <ul class="nav-links">
@@ -24,11 +24,29 @@
     <a href="#contact" class="btn btn-primary glass-sweep">Contact</a>
   </nav>
 
+  <!-- ================= Nav Bar (mobile) ================= -->
+  <nav class="navbar-mobile" id="mobileNavbar">
+    <a href="index.html" class="logo"><img src="images/hero/Hero Logo.svg" alt="IISifat"></a>
+    <button class="burger-btn" id="burgerBtn" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ================= Mobile Menu (dropdown panel + backdrop) ================= -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" data-menu-close></div>
+    <div class="mobile-menu-panel">
+      <ul class="mobile-menu-links">
+        <li><a href="#work" class="mobile-menu-link" data-menu-link>Works <span class="count">(16)</span></a></li>
+        <li><a href="#services" class="mobile-menu-link" data-menu-link>Services <span class="count">(5)</span></a></li>
+      </ul>
+      <a href="#contact" class="btn btn-primary glass-sweep mobile-menu-contact" data-menu-link>Contact</a>
+    </div>
+  </div>
 
 
 
-
-  <!-- ================= Hero (2nd red box) ================= -->
+  <!-- ================= Hero (desktop, unchanged) ================= -->
   <section class="hero" id="home">
 
         <!------ guide lines — purely visual, don't touch existing layout ------>
@@ -97,6 +115,42 @@
 
   </section>
 
+  <!-- ================= Hero (mobile only) ================= -->
+  <section class="hero-mobile" id="home-mobile">
+
+    <div class="hero-mobile-heading">
+      <img src="images/hero/UIUX.png" alt="UI/UX">
+    </div>
+
+    <h2 class="hero-mobile-subheading">
+      <img src="images/hero/Designer.png" alt="Designer">
+    </h2>
+
+    <div class="hero-mobile-image">
+      <img src="images/hero/Hero image.jpg" alt="Ieamin Islam Sifat">
+    </div>
+
+    <div class="hero-mobile-content">
+      <p class="hero-intro-lead">I'm <strong>Ieamin Islam Sifat,</strong></p>
+      <p class="hero-intro-text">
+        I design digital solutions that solve real problems — not just pretty
+        screens. From responsive web to mobile app, every interface starts
+        with how people think and behave.
+      </p>
+    </div>
+
+    <div class="hero-mobile-btns">
+      <a href="#work" class="btn btn-primary glass-sweep">Explore My Work</a>
+    </div>
+
+    <ul class="hero-mobile-stats">
+      <li><span class="stat-num">2+</span>Years of experience</li>
+      <li><span class="stat-num">16+</span>Complete Projects</li>
+      <li><span class="stat-num">100%</span>Pixel Perfect UI</li>
+    </ul>
+
+  </section>
+
 
 
 
@@ -133,6 +187,8 @@
 
 
 
+
+  
 
 <!-- ================= Services I Provide ================= -->
 <section class="services" id="services">
@@ -892,6 +948,7 @@
 
   <script src="js/loader.js"></script>
   <script src="js/cursor.js"></script>
+  <script src="js/responsive.js"></script>
   <script src="js/scroll.js"></script>
   <script src="js/works.js"></script>
   <script src="js/services.js"></script>

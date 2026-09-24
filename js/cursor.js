@@ -1,6 +1,4 @@
-// Custom premium cursor: a small dot that follows the mouse exactly,
-// and a larger ring that trails behind with easing (lerp) for that
-// smooth "premium" feel. Skips entirely on touch devices.
+
 
 (function () {
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -42,40 +40,31 @@
   }
   animateRing();
 
-// Any element that should trigger the "blend" hover state
-// (grows + inverts color via mix-blend-mode), besides images.
-const HOVER_TARGETS = "a, button, .service-item, .process-card, .logo-marquee, .testimonial-card, .site-footer, .cs-stat, .cs-process-item, .cs-finding-item, .cs-compare-table, .cs-persona-block, .cs-empathy-block, .cs-typography-card, .cs-colors-card, .cs-lessons-item, .footer-contact-item";
 
-const VIEW_TARGETS = ".hero-image, .work-image, .process-image, .about-photo, .cs-hero-image, .cs-problem-graphic, .cs-solution-image, .cs-persona-image, .cs-empathy-image, .cs-wireframe-wrap, .cs-ui-screen";
+  // one single target list.
+  const HOVER_TARGETS = "a, button, .service-item, .process-card, .logo-marquee, .testimonial-card, .site-footer, .cs-stat, .cs-process-item, .cs-finding-item, .cs-compare-table, .cs-persona-block, .cs-empathy-block, .cs-typography-card, .cs-colors-card, .cs-lessons-item, .footer-contact-item, .hero-image, .work-image, .process-image, .about-photo, .cs-hero-image, .cs-problem-graphic, .cs-solution-image, .cs-persona-image, .cs-empathy-image, .cs-wireframe-wrap, .cs-ui-screen";
 
   // ---- Event delegation: works for elements that exist now AND
   // elements added later by works.js / services.js (cards, modal, etc.) ----
   document.addEventListener("mouseover", (e) => {
-    const isImage = e.target.closest(VIEW_TARGETS);
-    const isHoverTarget = e.target.closest(HOVER_TARGETS);
-
-    // an image wins over the generic hover state — they never show together
-    if (isImage) {
-      ring.classList.add("is-view");
-      ring.classList.remove("is-hover");
-    } else if (isHoverTarget) {
+    const target = e.target.closest(HOVER_TARGETS);
+    if (target) {
       ring.classList.add("is-hover");
-      ring.classList.remove("is-view");
+      dot.classList.add("is-hover");
     }
-
-    if (isImage || isHoverTarget) dot.classList.add("is-hover");
   });
 
   document.addEventListener("mouseout", (e) => {
-    const isImage = e.target.closest(VIEW_TARGETS);
-    const isHoverTarget = e.target.closest(HOVER_TARGETS);
+    const target = e.target.closest(HOVER_TARGETS);
+    if (!target) return;
 
-    if (isImage) ring.classList.remove("is-view");
-    if (isHoverTarget) ring.classList.remove("is-hover");
-
-    // only bring the dot back once we've fully left both zones
-    const stillInside = e.relatedTarget && e.relatedTarget.closest?.(`${VIEW_TARGETS}, ${HOVER_TARGETS}`);
-    if (!stillInside) dot.classList.remove("is-hover");
+    // only remove the hover state once we've fully left the zone
+    // (handles nested elements, e.g. an <img> inside a .work-image)
+    const stillInside = e.relatedTarget && e.relatedTarget.closest?.(HOVER_TARGETS);
+    if (!stillInside) {
+      ring.classList.remove("is-hover");
+      dot.classList.remove("is-hover");
+    }
   });
 
   // hide the cursor entirely when it leaves the browser window

@@ -138,3 +138,40 @@ document.querySelectorAll(".testimonial-card").forEach((card) => {
     icon.src = icon.dataset.red;
   });
 });
+
+// mobile/touch: tap toggles the same red "active" look desktop gets on
+// hover — including swapping the quote icon, same as the hover logic above
+const isTouchDevice = !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+if (isTouchDevice) {
+  document.querySelectorAll(".testimonial-card").forEach((card) => {
+    const icon = card.querySelector(".testimonial-quote-icon");
+
+    card.addEventListener("click", () => {
+      const alreadyActive = card.classList.contains("is-active");
+
+      // deactivate every other card first (icon back to red + class removed)
+      document.querySelectorAll(".testimonial-card.is-active").forEach((c) => {
+        c.classList.remove("is-active");
+        const otherIcon = c.querySelector(".testimonial-quote-icon");
+        if (otherIcon) otherIcon.src = otherIcon.dataset.red;
+      });
+
+      if (!alreadyActive) {
+        card.classList.add("is-active");
+        if (icon) icon.src = icon.dataset.white;
+      }
+    });
+  });
+
+  // tapping outside any card clears the active state (and resets its icon)
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".testimonial-card")) {
+      document.querySelectorAll(".testimonial-card.is-active").forEach((c) => {
+        c.classList.remove("is-active");
+        const icon = c.querySelector(".testimonial-quote-icon");
+        if (icon) icon.src = icon.dataset.red;
+      });
+    }
+  });
+}

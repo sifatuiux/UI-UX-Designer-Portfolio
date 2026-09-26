@@ -950,8 +950,8 @@ body.menu-open { overflow: hidden; }
 
   .cs-process-item {
     padding: 24px clamp(20px, 5vw, 24px);
-    border-right: none !important;   /* single column: no vertical divider needed */
-    background: #FFFAFA !important;  /* the lighter shade is now the permanent mobile background — no tap needed */
+    border-right: none !important;   
+    background: #FAF4F2 !important;  
   }
 
   /* ---- force the divider back on for every item, overriding
@@ -1107,11 +1107,11 @@ body.menu-open { overflow: hidden; }
   .cs-finding-item {
     padding: 24px clamp(20px, 5vw, 24px);
     border-bottom: 1px solid #EFCDCE !important;
-    background: #FFFAFA !important; /* permanent lighter shade, no tap needed */
+    background: #FAF4F2 !important; 
   }
 
     .cs-findings-grid .cs-finding-item:nth-child(3),
-    .cs-findings-grid .cs-finding-item:nth-child(5) {
+    .cs-findings-grid .cs-finding-item:nth-child(6) {
     border-top: 1px solid #EFCDCE !important;
   }
 
@@ -1247,6 +1247,7 @@ body.menu-open { overflow: hidden; }
 
 .cs-yes { color: #2E7D4F; }
 .cs-no  { color: var(--red); }
+.cs-mid { color: #C9942A; }
 
 
 /* ============================================================
@@ -1481,13 +1482,10 @@ body.menu-open { overflow: hidden; }
      give each a bottom divider, first one also gets a top line ---- */
   .cs-persona-intro,
   .cs-persona-background,
-  .cs-persona-side {
-    border-right: none;
-    border-bottom: 1px solid #EFCDCE;
-  }
-
+  .cs-persona-side,
   .cs-persona-goals {
-    border-bottom: 1px solid #EFCDCE;
+    border-right: none;
+    border-top: 1px solid #EFCDCE;
   }
 
   .cs-persona-grid > .cs-persona-image {
@@ -1496,7 +1494,7 @@ body.menu-open { overflow: hidden; }
 
   .cs-persona-block {
     padding: 24px clamp(20px, 5vw, 24px);
-    background: #FFFAFA; /* permanent lighter shade, no tap needed */
+    background: #FAF4F2; /* permanent lighter shade, no tap needed */
   }
 
   .cs-persona-heading {

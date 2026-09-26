@@ -28,7 +28,30 @@
    <button type="button" class="btn btn-primary glass-sweep cs-back-btn" id="csBackBtn">Go Back</button>
 </nav>
 
+<!-- ============ NAV (mobile) ============ -->
+<nav class="navbar-mobile" id="mobileNavbar">
+  <a href="index.html" class="logo"><img src="images/hero/Hero Logo.svg" alt="Ieamin Islam Sifat logo"></a>
+  <button class="burger-btn" id="burgerBtn" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ Mobile Menu (dropdown panel + backdrop) ============ -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" data-menu-close></div>
+  <div class="mobile-menu-panel">
+    <ul class="mobile-menu-links">
+      <li><a href="index.html#works" class="mobile-menu-link" data-menu-link>Works <span class="count">(20)</span></a></li>
+      <li><a href="index.html#services" class="mobile-menu-link" data-menu-link>Services <span class="count">(5)</span></a></li>
+    </ul>
+    <button type="button" class="btn btn-primary glass-sweep mobile-menu-contact" id="csBackBtnMobile" data-menu-close>Go Back</button>
+  </div>
+</div>
+
 <div class="work-line-full reveal" data-reveal="fade"></div>
+
+
+
 
 <!-- ============ CASE STUDY HERO ============ -->
 <section class="cs-hero">
@@ -234,6 +257,8 @@
     <p class="cs-process-desc">Connect key screens and refine interactions, hierarchy, transitions, and overall experience.</p>
   </div>
 </div>
+
+
 
 <div class="work-line-full reveal" data-reveal="fade"></div>
 
@@ -716,7 +741,7 @@
   <div class="cs-ui-text reveal" data-reveal="left" style="--reveal-delay: 120ms">
     <div class="cs-ui-head">
       <span class="cs-ui-number">06 -</span>
-      <h3 class="cs-ui-title">Trust Through Specifics, Not Just Stars</h3>
+      <h3 class="cs-ui-title">Trust Through Specifics</h3>
     </div>
     <p class="cs-ui-desc">Kept the quotes tied to a real detail — which variant, which job, why it fit their day — instead of generic praise. Large portraits and a dark background give it some editorial weight instead of feeling like a stock testimonial block.</p>
   </div>
@@ -813,7 +838,7 @@
 <section class="contact" id="contact">
 
   <div class="contact-header reveal" data-reveal="up">
-    <h2 class="contact-title">Thanks for Reading Until the next one.</h2>
+    <h2 class="contact-title">Thanks for Reading Until the next one.</h2>
     <p class="contact-subtitle">If AETHEL made you curious about how it was built, or you're working on something that could use a similar hand - I'd love to hear from you.</p>
   </div>
 
@@ -978,14 +1003,21 @@
 
 <script src="js/case_study_motion.js"></script>
 <script src="js/cursor.js"></script>
+<script src="js/responsive.js"></script>
 <script>
-  document.getElementById('csBackBtn').addEventListener('click', () => {
+  function csGoBack() {
     if (document.referrer && document.referrer.includes(window.location.host)) {
       history.back();
     } else {
       window.location.href = 'index.html#works';
     }
-  });
+  }
+  document.getElementById('csBackBtn').addEventListener('click', csGoBack);
+
+  const csBackBtnMobile = document.getElementById('csBackBtnMobile');
+  if (csBackBtnMobile) {
+    csBackBtnMobile.addEventListener('click', csGoBack);
+  }
 </script>
 <script src="js/contact_footer.js"></script>
 

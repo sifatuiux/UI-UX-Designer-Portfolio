@@ -1,3 +1,14 @@
+/* ============================================================
+   GLOBAL: prevent horizontal overflow across all devices
+   (root cause fix for the 100vw full-bleed line trick below)
+   ============================================================ */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+
 /* ===== Design tokens ===== */
 :root {
   --cream: #F5EFED;
@@ -8,6 +19,11 @@
   --ink: #1A181B;
   --title: #504E4F;
   --muted: #878383;
+
+  --mob-title: 28px;       /* Section Title: 26–28px */
+  --mob-card-title: 18px;  /* Card Title: 18–20px */
+  --mob-body: 15px;        /* Body Text: 14px */
+  --mob-level: 13px;       /* Level/meta Text: 12px */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -126,7 +142,6 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 
 
 
-
 /* ================= Nav Bar (identical to homepage) ================= */
 .navbar {
   max-width: 1280px;
@@ -171,6 +186,205 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 }
 .btn-primary { background: var(--red); color: #FFF9F8; }
 .btn-primary:hover { background: #C33F49; transition: background 0.2s ease-in-out; }
+
+
+
+
+
+/* ============================================================
+   GLOBAL MOBILE TYPOGRAPHY SCALE
+   ============================================================ */
+
+/* mobile-only nav elements hidden by default (desktop-first markup) */
+.navbar-mobile,
+.mobile-menu { display: none; }
+
+/* ---- burger button (shared, styled here, only visible <=1024px) ---- */
+.burger-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  z-index: 60;
+}
+.burger-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--red);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.burger-btn.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.burger-btn.is-active span:nth-child(2) { opacity: 0; }
+.burger-btn.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+body.menu-open { overflow: hidden; }
+
+@media (max-width: 1024px) {
+
+  /* ---- swap desktop nav out, mobile nav in ---- */
+  .navbar { display: none; }
+
+  .navbar-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 55;
+    padding: 20px 24px;
+    background: var(--cream);
+    border-left: 1px solid #EFCDCE;
+    border-right: 1px solid #EFCDCE;
+    border-bottom: 1px solid #EFCDCE;
+  }
+  .navbar-mobile .logo img { height: 36px; width: auto; display: block; }
+
+
+  /* ---- full-bleed guide lines: use 100% instead of 100vw on mobile
+  (100vw causes device-dependent overflow/shift — this is the fix) ---- */
+  .work-line-full,
+  .footer-divider {
+    width: 100%;
+    margin-left: 0;
+  }
+
+
+  /* ---- mobile dropdown menu: overlay wrapper ---- */
+  .mobile-menu {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .mobile-menu.is-open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* ---- backdrop: dims + blurs the untouched lower part ---- */
+  .mobile-menu-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 24, 27, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .mobile-menu.is-open .mobile-menu-backdrop {
+    opacity: 1;
+  }
+
+  /* ---- panel: starts right BELOW the sticky navbar-mobile (not
+     behind it) so the panel's own box is fully visible — this is
+     what makes the top/bottom gap around the links equal. ---- */
+  .mobile-menu-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 78px; /* ≈ .navbar-mobile's rendered height at this breakpoint (20px+20px padding + 36px logo + borders) */
+    height: 32%;
+    background:
+      radial-gradient(120% 140% at 100% 0%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 55%),
+      linear-gradient(155deg, #E2545E 0%, var(--red) 45%, #BE3D47 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 28px 60px rgba(26, 24, 27, 0.28);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+    transform: translateY(-120%);
+    transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .mobile-menu.is-open .mobile-menu-panel {
+    transform: translateY(0);
+  }
+
+  .mobile-menu-links {
+    position: relative;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* ---- menu links: Works / Services — full width rows ---- */
+  .mobile-menu-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 4px;
+    color: #fafafa;
+    text-decoration: none;
+    font-size: var(--mob-body-lg, 16px);
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .mobile-menu-links li:last-child .mobile-menu-link {
+    border-bottom: none;
+  }
+
+  .mobile-menu-link:active {
+    opacity: 0.75;
+  }
+
+  .mobile-menu-link .count {
+    color: #fafafa;
+    font-size: var(--mob-level);
+    font-weight: 500;
+  }
+
+  /* ---- "Go Back" button inside the mobile menu (case study's version
+     of the homepage's Contact button) — same styling/position ---- */
+  .mobile-menu-contact {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--cream);
+    color: var(--red);
+    font-size: var(--mob-body-lg, 16px);
+    font-weight: 500;
+    padding: 14px 26px;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-mobile { padding: 16px 20px; }
+
+  .mobile-menu-panel {
+    top: 70px; /* ≈ .navbar-mobile's rendered height at this smaller breakpoint (16px+16px padding + 36px logo + borders) */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu,
+  .mobile-menu-backdrop,
+  .mobile-menu-panel { transition: none !important; }
+}
+
+
+
+
 
 
 
@@ -222,6 +436,47 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   transform: scale(1.04);
 }
 
+
+/* ============================================================
+   MOBILE RESPONSIVE — CASE STUDY HERO
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-hero {
+    padding: 28px clamp(20px, 5vw, 24px);
+  }
+
+  .cs-hero-title {
+    font-size: var(--mob-title);
+    padding-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .cs-hero-image {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin-left: calc(-1 * clamp(20px, 5vw, 24px));
+    margin-right: calc(-1 * clamp(20px, 5vw, 24px));
+  }
+}
+
+@media (max-width: 480px) {
+
+  .cs-hero {
+    padding: 24px 20px;
+  }
+
+  .cs-hero-title {
+    font-size: 26px;
+    padding-bottom: 20px;
+  }
+
+  .cs-hero-image {
+    aspect-ratio: 1 / 1;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}
 
 
 
@@ -277,6 +532,53 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 .cs-overview .cs-bullet-list li{ max-width: 1280px; line-height: 1.7; }
 
 
+/* ============================================================
+   MOBILE RESPONSIVE — SHARED TYPE TOKENS + PRODUCT OVERVIEW
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  /* ---- shared tokens: scale down everywhere they're used ---- */
+  .cs-section-title {
+    font-size: var(--mob-title);
+  }
+
+  .cs-subheading {
+    font-size: var(--mob-card-title);
+    margin: 20px 0 8px;
+  }
+
+  .cs-body {
+    font-size: var(--mob-body);
+  }
+
+  .cs-bullet-list li {
+    font-size: var(--mob-body);
+  }
+
+  /* ---- Product Overview: kill the fixed 1280px widths (overflow fix),
+     add side padding since the section has none by default ---- */
+  .cs-overview {
+    padding: 40px clamp(20px, 5vw, 24px);
+  }
+
+  .cs-overview .cs-section-title,
+  .cs-overview .cs-body,
+  .cs-overview .cs-bullet-list,
+  .cs-overview .cs-bullet-list li {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-overview {
+    padding: 32px 20px;
+  }
+}
+
+
+
+
 
 
 /* ================= Quick Stats bar ================= */
@@ -299,8 +601,13 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 .cs-stat:first-child { border-left: none; }
 
 
-.cs-stats :hover{
-  background: #FFFAFA;
+/* ---- hover effect: only for devices that actually support hover
+   (real mouse/desktop). On touch devices this stays off entirely,
+   so tapping never shows a "stuck" click/background-change effect. ---- */
+@media (hover: hover) and (pointer: fine) {
+  .cs-stats :hover{
+    background: #FFFAFA;
+  }
 }
 
 
@@ -320,6 +627,49 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   font-weight: 500;
   color: var(--muted);
 }
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — QUICK STATS
+   ============================================================ */
+
+/* ---- Tablet (481px–1024px): stays 4-in-a-row like desktop,
+   just scaled down padding/font — a mini version of the laptop UI ---- */
+@media (max-width: 1024px) {
+  .cs-stat {
+    padding: 28px clamp(16px, 3vw, 32px);
+  }
+
+  .cs-stat-label {
+    font-size: var(--mob-level);
+    margin-bottom: 6px;
+  }
+
+  .cs-stat-value {
+    font-size: var(--mob-body);
+  }
+}
+
+/* ---- Phone (≤480px): switch to a 2x2 double-column grid ---- */
+@media (max-width: 480px) {
+  .cs-stats {
+    flex-wrap: wrap;
+  }
+
+  .cs-stat {
+    flex: 1 1 50%;
+    padding: 20px clamp(14px, 4vw, 20px);
+    border-left: 1px solid #EFCDCE;
+  }
+
+  /* column border: odd items (1st, 3rd) no left line, even items (2nd, 4th) get one */
+  .cs-stat:nth-child(odd) { border-left: none; }
+  .cs-stat:nth-child(even) { border-left: 1px solid #EFCDCE; }
+
+  /* row border: 3rd & 4th item get a top line to separate the two rows */
+  .cs-stat:nth-child(n+3) { border-top: 1px solid #EFCDCE; }
+}
+
 
 
 
@@ -363,6 +713,50 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 .cs-problem .cs-body          { max-width: 692px; line-height: 1.5; }
 .cs-problem .cs-bullet-list   { max-width: 692px; }
 .cs-problem .cs-bullet-list li{ line-height: 1.5; }
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — PROBLEM STATEMENT
+   (image on top, text below — reversed from HTML source order,
+   since the markup writes text first then the graphic)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-problem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding: 60px clamp(20px, 5vw, 24px) 40px;
+  }
+
+  /* graphic (image) shows first */
+  .cs-problem-graphic {
+    order: 1;
+    width: 100%;
+    max-width: 100%;
+    flex: none;
+  }
+
+  /* text shows second, below the image */
+  .cs-problem-text {
+    order: 2;
+    max-width: 100%;
+    flex: none;
+  }
+
+  .cs-problem .cs-body,
+  .cs-problem .cs-bullet-list {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-problem {
+    padding: 48px 20px 32px;
+    gap: 24px;
+  }
+}
+
 
 
 
@@ -411,6 +805,57 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 
 
 
+/* ============================================================
+   MOBILE RESPONSIVE — POSSIBLE SOLUTION
+   (image on top, text below — this already matches HTML source
+   order, so no "order" property needed here)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-solution {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+    padding: 40px clamp(20px, 5vw, 24px);
+  }
+
+  .cs-solution-image {
+    width: calc(100% + clamp(20px, 5vw, 24px) * 2);
+    max-width: none;
+    flex: none;
+    margin-left: calc(-1 * clamp(20px, 5vw, 24px));
+    margin-right: calc(-1 * clamp(20px, 5vw, 24px));
+  }
+
+  .cs-solution-text {
+    flex: none;
+    max-width: 100%;
+  }
+
+  .cs-solution .cs-body,
+  .cs-solution .cs-bullet-list {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-solution {
+    padding: 32px 20px;
+    gap: 20px;
+  }
+
+  .cs-solution-image {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}
+
+
+
+
+
+
 
 
 
@@ -443,7 +888,12 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   transition: background 0.2s ease-in-out;
 }
 
-.cs-process-item:hover { background: #FFFAFA; }
+/* ---- hover: only for devices with a real mouse. On touch devices
+   this never fires, so tapping a card can't trigger any background
+   change — the mobile background below is fixed/permanent instead. ---- */
+@media (hover: hover) and (pointer: fine) {
+  .cs-process-item:hover { background: #FFFAFA; }
+}
 
 .cs-process-grid .cs-process-item:nth-child(3n) { border-right: none; }
 .cs-process-grid .cs-process-item:nth-child(n+4) { border-bottom: none; }
@@ -482,6 +932,67 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   max-width: 100%;
   margin: 0;
 }
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — DESIGN PROCESS
+   (3-column grid -> single column, 6 stacked rows)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-process {
+    padding: 40px clamp(20px, 5vw, 24px) 12px;
+  }
+
+  .cs-process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-process-item {
+    padding: 24px clamp(20px, 5vw, 24px);
+    border-right: none !important;   /* single column: no vertical divider needed */
+    background: #FFFAFA !important;  /* the lighter shade is now the permanent mobile background — no tap needed */
+  }
+
+  /* ---- force the divider back on for every item, overriding
+     desktop's nth-child(n+4){border-bottom:none} no matter what ---- */
+  .cs-process-grid .cs-process-item {
+    border-bottom: 1px solid #EFCDCE !important;
+  }
+
+  /* only the actual last item (06) should have no line under it */
+  .cs-process-grid .cs-process-item:last-child {
+    border-bottom: none !important;
+  }
+
+  .cs-process-number {
+    width: 34px;
+    height: 34px;
+    font-size: var(--mob-body);
+  }
+
+  .cs-process-title {
+    font-size: var(--mob-card-title);
+  }
+
+  .cs-process-desc {
+    font-size: var(--mob-body);
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-process {
+    padding: 32px 20px 12px;
+  }
+
+  .cs-process-item {
+    padding: 20px;
+  }
+}
+
+
+
+
 
 
 
@@ -526,7 +1037,11 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   transition: background 0.2s ease-in-out;
 }
 
-.cs-finding-item:hover { background: #FFFAFA; }
+/* ---- hover: only for devices with a real mouse. On touch devices
+   this never fires (no stuck tap-background on mobile). ---- */
+@media (hover: hover) and (pointer: fine) {
+  .cs-finding-item:hover { background: #FFFAFA; }
+}
 
 .cs-findings-grid .cs-finding-item:nth-child(2n) { border-right: none; }
 
@@ -566,6 +1081,72 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 }
 
 
+/* ============================================================
+   MOBILE RESPONSIVE — USER RESEARCH + KEY FINDINGS
+   (2-column grid -> single column, 6 stacked rows.
+   Grid itself carries no border; each card gets its own
+   border-bottom, only the first card also gets a border-top.)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-research {
+    padding: 60px clamp(20px, 5vw, 24px) 20px;
+  }
+
+  .cs-research .cs-body,
+  .cs-research .cs-bullet-list {
+    max-width: 100%;
+  }
+
+  .cs-findings-grid {
+    grid-template-columns: 1fr;
+    border-left: none;
+    border-right: none;
+  }
+
+  .cs-finding-item {
+    padding: 24px clamp(20px, 5vw, 24px);
+    border-bottom: 1px solid #EFCDCE !important;
+    background: #FFFAFA !important; /* permanent lighter shade, no tap needed */
+  }
+
+    .cs-findings-grid .cs-finding-item:nth-child(3),
+    .cs-findings-grid .cs-finding-item:nth-child(5) {
+    border-top: 1px solid #EFCDCE !important;
+  }
+
+  .cs-finding-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .cs-finding-title {
+    font-size: var(--mob-card-title);
+  }
+
+  .cs-finding-desc {
+    font-size: var(--mob-body);
+  }
+
+  /* disable the reveal transform so stacked single-column cards
+     don't overlap/clip mid-animation (fade-only, no movement) */
+  .cs-findings-grid .cs-finding-item.reveal,
+  .cs-findings-grid .cs-finding-item.reveal.is-visible {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-research {
+    padding: 48px 20px 16px;
+  }
+
+  .cs-finding-item {
+    padding: 20px;
+  }
+}
+
+
 
 
 
@@ -595,6 +1176,7 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   border-left: 1px solid #EFCDCE;
   border-right: 1px solid #EFCDCE;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .cs-compare-table {
@@ -649,7 +1231,11 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 .cs-compare-table tbody td:last-child { border-right: none; }
 .cs-compare-table tbody tr:last-child td { border-bottom: none; }
 
-.cs-compare-table tbody td:hover { background: #FFFAFA; }
+/* ---- hover: only for devices with a real mouse. On touch devices
+   this never fires (no stuck tap-background on mobile). ---- */
+@media (hover: hover) and (pointer: fine) {
+  .cs-compare-table tbody td:hover { background: #FFFAFA; }
+}
 
 /* ---- Yes / No text ---- */
 .cs-yes,
@@ -662,6 +1248,74 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 .cs-yes { color: #2E7D4F; }
 .cs-no  { color: var(--red); }
 
+
+/* ============================================================
+   MOBILE RESPONSIVE — COMPETITIVE ANALYSIS TABLE
+   (table-layout:fixed would squeeze 5 columns unreadable on
+   mobile, so instead: switch to auto layout with a min-width,
+   and let .cs-compare-table-wrap's existing overflow-x:auto
+   handle horizontal scroll — same pattern already used
+   elsewhere on this site, e.g. .work-grid.)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-compare {
+    padding: 60px clamp(20px, 5vw, 24px) 24px;
+  }
+
+  .cs-compare-table {
+    table-layout: auto;
+    min-width: 640px; /* forces horizontal scroll instead of squeezed columns */
+  }
+
+  .cs-compare-table thead th,
+  .cs-compare-table tbody th {
+    font-size: var(--mob-body);
+    padding: 16px 12px;
+    white-space: nowrap;
+  }
+
+  .cs-compare-corner {
+    padding-left: 20px !important;
+  }
+
+  .cs-compare-table tbody th {
+    padding: 16px 20px;
+  }
+
+  .cs-compare-table tbody td {
+    padding: 16px 12px;
+  }
+
+  .cs-yes,
+  .cs-no {
+    font-size: var(--mob-body);
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-compare {
+    padding: 48px 20px 20px;
+  }
+
+  .cs-compare-table {
+    min-width: 560px;
+  }
+
+  .cs-compare-table thead th,
+  .cs-compare-table tbody th,
+  .cs-compare-table tbody td {
+    padding: 14px 10px;
+  }
+
+  .cs-compare-corner {
+    padding-left: 16px !important;
+  }
+
+  .cs-compare-table tbody th {
+    padding: 14px 16px;
+  }
+}
 
 
 
@@ -711,7 +1365,9 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   transition: transform 0.4s ease;
 }
 
-.cs-persona-image:hover img { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .cs-persona-image:hover img { transform: scale(1.04); }
+}
 
 /* ---- Side column (row 1, col 2): Goals + Pain Points stacked ---- */
 .cs-persona-side {
@@ -734,7 +1390,9 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   justify-content: center;
 }
 
-.cs-persona-block:hover { background: #FFFAFA; }
+@media (hover: hover) and (pointer: fine) {
+  .cs-persona-block:hover { background: #FFFAFA; }
+}
 
 .cs-persona-side .cs-persona-block { flex: 1; }
 
@@ -783,6 +1441,91 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   max-width: 100%;
 }
 
+/* ============================================================
+   MOBILE RESPONSIVE — USER PERSONA
+   Order: Image -> Intro (details) -> Background -> Goals -> Pain Points
+   (desktop grid/order stays completely untouched above 1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-persona {
+    padding: 60px clamp(20px, 5vw, 24px) 24px;
+  }
+
+  /* hide the description line directly under the "User Persona"
+     title on mobile only — desktop keeps showing it, untouched */
+  .cs-persona > .cs-body {
+    display: none;
+  }
+
+  .cs-persona-grid {
+    grid-template-columns: 1fr;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* ---- reorder via flex/grid "order" — HTML stays exactly the same ---- */
+  .cs-persona-image    { order: 1; }
+  .cs-persona-intro     { order: 2; }
+  .cs-persona-background{ order: 3; }
+  .cs-persona-side      { order: 4; } /* contains Goals then Pain Points, already stacked */
+
+  /* ---- image: fixed aspect ratio instead of stretching to grid row height ---- */
+  .cs-persona-image {
+    aspect-ratio: 4 / 3;
+    border-right: none;
+    border-bottom: 1px solid #EFCDCE;
+  }
+
+  /* ---- every block: reset desktop's grid-position borders,
+     give each a bottom divider, first one also gets a top line ---- */
+  .cs-persona-intro,
+  .cs-persona-background,
+  .cs-persona-side {
+    border-right: none;
+    border-bottom: 1px solid #EFCDCE;
+  }
+
+  .cs-persona-goals {
+    border-bottom: 1px solid #EFCDCE;
+  }
+
+  .cs-persona-grid > .cs-persona-image {
+    border-top: 1px solid #EFCDCE;
+  }
+
+  .cs-persona-block {
+    padding: 24px clamp(20px, 5vw, 24px);
+    background: #FFFAFA; /* permanent lighter shade, no tap needed */
+  }
+
+  .cs-persona-heading {
+    font-size: var(--mob-card-title);
+  }
+
+  .cs-persona-block .cs-bullet-list li,
+  .cs-persona-detail-row,
+  .cs-persona-background .cs-body {
+    font-size: var(--mob-body);
+  }
+
+  /* disable reveal transform so reordered stacked blocks
+     don't overlap/clip mid-animation (fade-only, no movement) */
+  .cs-persona-grid .reveal,
+  .cs-persona-grid .reveal.is-visible {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-persona {
+    padding: 48px 20px 20px;
+  }
+
+  .cs-persona-block {
+    padding: 20px;
+  }
+}
 
 
 
@@ -828,7 +1571,9 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   transition: background 0.2s ease-in-out;
 }
 
-.cs-empathy-block:hover { background: #FFFAFA; }
+@media (hover: hover) and (pointer: fine) {
+  .cs-empathy-block:hover { background: #FFFAFA; }
+}
 
 .cs-empathy-thinks { 
   grid-column: 1; 
@@ -905,8 +1650,86 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   transition: transform 0.4s ease;
 }
 
-.cs-empathy-image:hover img { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .cs-empathy-image:hover img { transform: scale(1.04); }
+}
 
+
+/* ============================================================
+   MOBILE RESPONSIVE — USER EMPATHY MAP
+   Image + spacers hidden. 4 quadrant blocks stack in DOM order:
+   Thinks -> Says -> Does -> Feels.
+   (desktop grid stays completely untouched above 1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-empathy {
+    padding: 60px 20px 24px;
+  }
+
+  .cs-empathy > .cs-body {
+    display: none;
+  }
+
+  .cs-empathy-image-wrap,
+  .cs-empathy-spacer-top,
+  .cs-empathy-spacer-bottom {
+    display: none;
+  }
+
+  .cs-empathy-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    border-left: none;
+    border-right: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .cs-empathy-thinks,
+  .cs-empathy-says,
+  .cs-empathy-does,
+  .cs-empathy-feels {
+    grid-column: auto;
+    grid-row: auto;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #EFCDCE;
+  }
+
+  .cs-empathy-grid > .cs-empathy-thinks {
+    border-top: 1px solid #EFCDCE;
+  }
+
+  /* card-এর নিজের ভিতরে left/right space — এটাই মূল ফিক্স */
+  .cs-empathy-block {
+    padding: 20px;
+  }
+
+  .cs-empathy-heading {
+    font-size: var(--mob-card-title);
+  }
+
+  .cs-empathy-block .cs-bullet-list li {
+    font-size: var(--mob-body);
+  }
+
+  .cs-empathy-grid .reveal,
+  .cs-empathy-grid .reveal.is-visible {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-empathy {
+    padding: 48px 20px 20px;
+  }
+
+  .cs-empathy-block {
+    padding: 16px;
+  }
+}
 
 
 
@@ -942,7 +1765,9 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   transition: background 0.2s ease-in-out;
 }
 
-.cs-typography-card:hover { background: #FFFAFA; }
+@media (hover: hover) and (pointer: fine) {
+  .cs-typography-card:hover { background: #FFFAFA; }
+}
 
 /* ---- Image: sits inside with the 32px margin from card padding ---- */
 .cs-typography-image {
@@ -950,6 +1775,46 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   width: 100%;
   height: auto;
 }
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — TYPOGRAPHY
+   Image kept large (not shrunk to fit) + horizontal swipe/scroll,
+   same pattern as the Competitive Analysis table.
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-typography {
+    padding: 60px clamp(20px, 5vw, 24px) 24px;
+  }
+
+  .cs-typography-card {
+    padding: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cs-typography-image {
+    width: auto;
+    max-width: none;
+    height: 460px; /* keeps the image large/readable — forces horizontal scroll instead of shrinking */
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-typography {
+    padding: 48px 20px 20px;
+  }
+
+  .cs-typography-card {
+    padding: 16px;
+  }
+
+  .cs-typography-image {
+    height: 360px;
+  }
+}
+
 
 
 
@@ -997,7 +1862,10 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   transition: background 0.2s ease-in-out;
 }
 
-.cs-colors-card:hover { background: #FFFAFA; }
+@media (hover: hover) and (pointer: fine) {
+  .cs-colors-card:hover { background: #FFFAFA; }
+}
+
 .cs-colors-card:first-child { border-left: none; }
 
 /* ---- Title ---- */
@@ -1015,6 +1883,81 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   height: auto;
 }
 
+
+/* ============================================================
+   MOBILE RESPONSIVE — USED COLORS
+   Title/description get left-right padding (gap from the border).
+   The card carousel itself stays flush with the section border
+   (no extra margin) and scrolls edge-to-edge — matches the
+   Selected Works carousel pattern (.work-grid).
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-colors {
+    padding: 60px 0 24px;
+  }
+
+  /* title + description: padding here, not on the grid/cards */
+  .cs-colors > .cs-section-title,
+  .cs-colors > .cs-body {
+    padding-left: clamp(20px, 5vw, 24px);
+    padding-right: clamp(20px, 5vw, 24px);
+  }
+
+  .cs-colors-grid {
+    gap: 16px;
+    border-left: none;
+    border-right: none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    margin-left: 0;
+    padding-left: clamp(20px, 5vw, 24px);
+    padding-right: clamp(20px, 5vw, 24px);
+  }
+
+  .cs-colors-card {
+    flex: 0 0 300px;
+    max-width: 300px;
+    width: 300px;
+    border: 1px solid #EFCDCE; /* full border on every card, since they're no longer touching edge-to-edge */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .cs-colors-card:first-child {
+    border-left: 1px solid #EFCDCE;
+  }
+
+  .cs-colors-title {
+    font-size: var(--mob-card-title);
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-colors {
+    padding: 48px 0 20px;
+  }
+
+  .cs-colors > .cs-section-title,
+  .cs-colors > .cs-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cs-colors-grid {
+    gap: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cs-colors-card {
+    flex: 0 0 260px;
+    max-width: 260px;
+    width: 260px;
+    padding: 24px;
+  }
+}
 
 
 
@@ -1054,6 +1997,35 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 }
 
 
+/* ============================================================
+   MOBILE RESPONSIVE — MID-FIDELITY WIREFRAME
+   Title/description get left-right padding (gap from the border).
+   The image wrapper stays flush (full width, no side padding).
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-wireframe {
+    padding: 60px 0 24px;
+  }
+
+  .cs-wireframe > .cs-section-title,
+  .cs-wireframe > .cs-body {
+    padding-left: clamp(20px, 5vw, 24px);
+    padding-right: clamp(20px, 5vw, 24px);
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-wireframe {
+    padding: 48px 0 20px;
+  }
+
+  .cs-wireframe > .cs-section-title,
+  .cs-wireframe > .cs-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 
 
 
@@ -1142,6 +2114,84 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 }
 
 
+/* ============================================================
+   MOBILE RESPONSIVE — USER INTERFACE
+   Every row (normal and reversed) stacks as: image on top,
+   text below. Image is full-bleed (no side space); text gets
+   left-right padding. Section's own title/intro get padding too.
+   Extra top/bottom margin on each row + the divider lines gives
+   clear breathing room between each screen+text pair.
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-ui {
+    padding: 60px 0 24px;
+  }
+
+  .cs-ui > .cs-section-title,
+  .cs-ui > .cs-body {
+    padding-left: clamp(20px, 5vw, 24px);
+    padding-right: clamp(20px, 5vw, 24px);
+  }
+
+  .cs-ui-row,
+  .cs-ui-row-reverse {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    border-left: none;
+    border-right: none;
+    margin-bottom: 32px;
+  }
+
+  /* image always first, text always second — regardless of
+     the row-reverse class used for the desktop alternating layout */
+  .cs-ui-screen {
+    order: 1;
+    flex: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 640 / 500;
+  }
+
+  .cs-ui-text {
+    order: 2;
+    padding: 0 clamp(20px, 5vw, 24px);
+  }
+
+  .cs-ui-number,
+  .cs-ui-title {
+    font-size: var(--mob-card-title);
+  }
+
+  .cs-ui-desc {
+    font-size: var(--mob-body);
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-ui {
+    padding: 48px 0 20px;
+  }
+
+  .cs-ui > .cs-section-title,
+  .cs-ui > .cs-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cs-ui-row,
+  .cs-ui-row-reverse {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .cs-ui-text {
+    padding: 0 20px;
+  }
+}
+
+
 
 
 
@@ -1182,7 +2232,9 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
 .cs-lessons-item:last-child { border-right: none; }
 .cs-lessons-item:last-child { border-left: 1px solid #EFCDCE; }
 
-.cs-lessons-item:hover { background: #FFFAFA; }
+@media (hover: hover) and (pointer: fine) {
+  .cs-lessons-item:hover { background: #FFFAFA; }
+}
 
 /* ---- Number + title row ---- */
 .cs-lessons-head {
@@ -1220,6 +2272,65 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   margin: 0;
 }
 
+
+/* ============================================================
+   MOBILE RESPONSIVE — WHAT THIS PROJECT TAUGHT ME
+   3-column grid -> single column, 3 stacked rows.
+   Uses a grid row-gap + grid background trick (instead of
+   border-bottom) to guarantee the divider line always shows,
+   regardless of any border/animation override conflicts.
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  .cs-lessons {
+    padding: 60px clamp(20px, 5vw, 24px) 12px;
+  }
+
+  .cs-lessons-grid {
+    grid-template-columns: 1fr;
+    background: #EFCDCE; /* shows through the 1px row-gaps as the divider line */
+    border-left: none;
+    border-right: none;
+  }
+
+  .cs-lessons-item {
+    padding: 24px clamp(20px, 5vw, 24px);
+    border-top: 1px solid #EFCDCE;
+    background: #FFFAFA;
+    text-align: left;
+  }
+
+  .cs-lessons-number {
+    width: 34px;
+    height: 34px;
+    font-size: var(--mob-body);
+  }
+
+  .cs-lessons-item-title {
+    font-size: var(--mob-card-title);
+  }
+
+  .cs-lessons-desc {
+    font-size: var(--mob-body);
+  }
+
+  /* disable reveal transform so stacked cards don't
+     overlap/clip mid-animation (fade-only, no movement) */
+  .cs-lessons-grid .reveal,
+  .cs-lessons-grid .reveal.is-visible {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-lessons {
+    padding: 48px 20px 12px;
+  }
+
+  .cs-lessons-item {
+    padding: 20px;
+  }
+}
 
 
 
@@ -1509,4 +2620,158 @@ body { font-family: 'manrope',  system-ui, sans-serif; background: var(--cream);
   margin: 0;
   font-size: 14px;
   color: #EFCDCE;
+}
+
+
+
+
+
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — CONTACT (Start A Project) + FOOTER
+   (identical pattern to home_page.css)
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  /* ---- contact ---- */
+  .contact {
+    padding-top: 60px;
+  }
+
+  .contact-header {
+    padding: 0 clamp(20px, 5vw, 24px);
+    margin-bottom: 36px;
+  }
+
+  .contact-title {
+    font-size: var(--mob-title);
+    margin: 0 0 12px;
+  }
+
+  .contact-subtitle {
+    font-size: var(--mob-body);
+  }
+
+  .contact-card {
+    max-width: calc(100% - clamp(40px, 10vw, 48px));
+    padding: 28px clamp(20px, 5vw, 24px);
+  }
+
+  .contact-card-title {
+    font-size: var(--mob-card-title);
+    margin: 0 0 20px;
+  }
+
+  .contact-line {
+    font-size: var(--mob-body);
+  }
+
+  .contact-input {
+    font-size: var(--mob-body);
+  }
+
+  .contact-input--inline {
+    width: 180px;
+  }
+
+  .contact-form-note {
+    font-size: var(--mob-level);
+  }
+
+  .contact-submit {
+    font-size: var(--mob-body);
+  }
+
+  /* ---- overlap effect: footer's top line meets the card's bottom,
+     same illusion as desktop, re-tuned for the card's mobile height.
+     Adjust --footer-overlap below if the alignment drifts on your device. */
+  .site-footer {
+    --footer-overlap: 77px;
+    margin-top: calc(-1 * var(--footer-overlap));
+  }
+
+  .footer-top {
+    padding-top: calc(var(--footer-overlap) + 48px);
+    padding-bottom: 56px;
+  }
+
+  /* ---- footer columns: 2-col on tablet, Contacts spans full width ---- */
+  .footer-inner {
+    padding-left: clamp(20px, 5vw, 24px);
+    padding-right: clamp(20px, 5vw, 24px);
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
+  }
+
+  .footer-col--contacts {
+    grid-column: 1 / -1; /* Contacts spans both columns on its own row */
+  }
+
+  .footer-heading {
+    font-size: var(--mob-card-title);
+  }
+
+  .footer-contact-label {
+    font-size: var(--mob-level);
+  }
+
+  .footer-contact-value {
+    font-size: var(--mob-body);
+  }
+
+  .footer-links a {
+    font-size: var(--mob-body);
+  }
+
+  /* ---- back-to-top: move out of absolute top-right corner
+     (would collide with stacked columns), place after the columns ---- */
+  .footer-top-btn {
+    position: static;
+    margin-top: 8px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom p {
+    font-size: var(--mob-level);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-card {
+    max-width: calc(100% - 40px);
+    padding: 24px 20px;
+  }
+
+  .contact-input--inline {
+    width: 140px;
+    max-width: 55%;
+  }
+
+  .footer-inner {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .site-footer {
+    --footer-overlap: 72px;
+  }
+
+  .footer-top {
+    padding-top: calc(var(--footer-overlap) + 40px);
+    padding-bottom: 44px;
+  }
+
+  /* ---- footer columns: back to single column on small phones ---- */
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-col--contacts {
+    grid-column: auto;
+  }
 }

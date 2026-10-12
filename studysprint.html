@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name | UI/UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/case_study.css">
+  <link rel="stylesheet" href="css/cursor.css">
+</head>
+
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar">
+  <a href="index.html" class="logo">
+    <img src="images/hero/Hero Logo.svg" alt="Ieamin Islam Sifat logo">
+  </a>
+
+  <div class="nav-links">
+    <a href="index.html#works">Works <span class="count">(20)</span></a>
+    <a href="index.html#services">Services <span class="count">(5)</span></a>
+  </div>
+
+   <button type="button" class="btn btn-primary glass-sweep cs-back-btn" id="csBackBtn">Go Back</button>
+</nav>
+
+<!-- ============ NAV (mobile) ============ -->
+<nav class="navbar-mobile" id="mobileNavbar">
+  <a href="index.html" class="logo"><img src="images/hero/Hero Logo.svg" alt="Ieamin Islam Sifat logo"></a>
+  <button class="burger-btn" id="burgerBtn" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ Mobile Menu ============ -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" data-menu-close></div>
+  <div class="mobile-menu-panel">
+    <ul class="mobile-menu-links">
+      <li><a href="index.html#works" class="mobile-menu-link" data-menu-link>Works <span class="count">(20)</span></a></li>
+      <li><a href="index.html#services" class="mobile-menu-link" data-menu-link>Services <span class="count">(5)</span></a></li>
+    </ul>
+    <button type="button" class="btn btn-primary glass-sweep mobile-menu-contact" id="csBackBtnMobile" data-menu-close>Go Back</button>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ CASE STUDY HERO ============ -->
+<section class="cs-hero">
+  <h1 class="cs-hero-title reveal" data-reveal="up">
+    <span class="cs-hero-title-accent">Study Sprint</span> – Group Study App
+  </h1>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-hero-image reveal" data-reveal="fade" style="--reveal-delay: 100ms">
+  <img src="images/studysprint/studysprint-hero.jpg" alt="Study Sprint – Group Study App">
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+</section>
+
+<!-- ============ PRODUCT OVERVIEW ============ -->
+<section class="cs-overview">
+  <h2 class="cs-section-title reveal" data-reveal="up">Product Overview</h2>
+  <ul class="cs-bullet-list reveal" data-reveal="up" style="--reveal-delay: 100ms">
+    <li>Study Sprint is a mobile app that helps students in Bangladesh study together. It connects HSC, admission, and university students through live study groups, nearby peers, and focus timers.</li>
+    <li>Students are the primary users. Instead of scattered Messenger and WhatsApp groups, the app gives them one place to find study partners, join live pods, and track their own progress.</li>
+    <li>Location sharing is approximate, temporary, and optional. Ghost mode, student verification, reporting, and blocking keep every session safe.</li>
+    <li>The design balances a calm glass interface, motivating community features, and simple controls, so the app supports focus instead of distracting from it.</li>
+  </ul>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ QUICK STATS ============ -->
+<section class="cs-stats">
+  <div class="cs-stat reveal" data-reveal="up">
+    <span class="cs-stat-label">Role</span>
+    <span class="cs-stat-value">UI/UX Designer</span>
+  </div>
+
+  <div class="cs-stat reveal" data-reveal="up" style="--reveal-delay: 80ms">
+    <span class="cs-stat-label">Client</span>
+    <span class="cs-stat-value">Self-initiated Project</span>
+  </div>
+
+  <div class="cs-stat reveal" data-reveal="up" style="--reveal-delay: 160ms">
+    <span class="cs-stat-label">Duration</span>
+    <span class="cs-stat-value">4 Weeks</span>
+  </div>
+
+  <div class="cs-stat reveal" data-reveal="up" style="--reveal-delay: 240ms">
+  <span class="cs-stat-label">Prototype</span>
+  <span class="cs-stat-value">
+    <a href="#" target="_blank" style="color: inherit; text-decoration: none;">
+      Figma Prototype
+    </a>
+  </span>
+</div>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ PROBLEM STATEMENT ============ -->
+<section class="cs-problem">
+  <div class="cs-problem-text reveal" data-reveal="left">
+    <h2 class="cs-section-title">Problem Statement</h2>
+
+    <p class="cs-body">
+      Many students in Bangladesh study alone at home or in noisy Messenger and WhatsApp groups. Motivation drops, good study partners are hard to find, and sharing location with strangers feels unsafe.
+    </p>
+    <p class="cs-body">The challenge was to create an app that could:</p>
+
+    <ul class="cs-bullet-list">
+      <li>Help students find study partners nearby and in groups</li>
+      <li>Keep location sharing private, approximate, and optional</li>
+      <li>Make joining a live study session fast</li>
+      <li>Keep students focused with timers and streaks, not feeds</li>
+      <li>Let students see their own study progress clearly</li>
+      <li>Put safety tools like reporting and blocking within easy reach</li>
+    </ul>
+
+    <h3 class="cs-subheading">Core Problem</h3>
+    <p class="cs-body">
+      How might we help students study together, stay consistent, and stay safe, without turning study time into another distracting social feed?
+    </p>
+  </div>
+
+<div class="cs-problem-graphic reveal" data-reveal="right" style="--reveal-delay: 120ms" aria-hidden="true">
+  <img src="images/studysprint/problem.png" alt="problem">
+</div>
+
+</section>
+
+<!-- ============ POSSIBLE SOLUTION ============ -->
+<section class="cs-solution">
+  <div class="cs-solution-image reveal" data-reveal="left">
+    <img src="images/studysprint/studysprint-solution.jpg" alt="Study Sprint solution mockup on phones">
+  </div>
+
+  <div class="cs-solution-text reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <h2 class="cs-section-title">Possible Solution</h2>
+
+    <p class="cs-body">
+      The proposed solution was a mobile app that brings study partners, live groups, and focus tools into one calm space, while keeping location and safety under the student's control.
+    </p>
+    <p class="cs-body">Key solution areas included:</p>
+
+    <ul class="cs-bullet-list">
+      <li>A home screen with live peers, your groups, and a focus shortcut</li>
+      <li>A privacy-first Nearby map with approximate zones and Ghost mode</li>
+      <li>Study pods with sprint schedules, agendas, notes, and live rooms</li>
+      <li>A Solo Focus timer with Pomodoro blocks and friend presence</li>
+      <li>Stats for weekly focus time, streaks, and subject split</li>
+      <li>Student verification, reporting, and blocking built into profiles and chats</li>
+    </ul>
+
+    <p class="cs-body">
+      This approach lets students feel supported by a study community first, then gives them the tools to stay consistent and safe on their own terms.
+    </p>
+  </div>
+</section>
+
+<!-- ============ DESIGN PROCESS ============ -->
+<section class="cs-process">
+  <h2 class="cs-section-title reveal" data-reveal="up">Design Process</h2>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-process-grid">
+  <div class="cs-process-item reveal" data-reveal="up">
+    <div class="cs-process-head">
+      <span class="cs-process-number">01</span>
+      <h3 class="cs-process-title">User Research</h3>
+    </div>
+    <p class="cs-process-desc">Understand how students study today, and what keeps them from studying with others.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 90ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">02</span>
+      <h3 class="cs-process-title">User Flow & IA</h3>
+    </div>
+    <p class="cs-process-desc">Map onboarding, the five main tabs, and the journey from finding a peer to studying together.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 180ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">03</span>
+      <h3 class="cs-process-title">Design System</h3>
+    </div>
+    <p class="cs-process-desc">Define typography, colors, spacing, glass styles, components, and states for the whole app.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 270ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">04</span>
+      <h3 class="cs-process-title">Wireframe</h3>
+    </div>
+    <p class="cs-process-desc">Structure each screen, navigation, and content hierarchy before any visual styling.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 360ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">05</span>
+      <h3 class="cs-process-title">UI Design</h3>
+    </div>
+    <p class="cs-process-desc">Create polished screens with glass cards, a floating navigation dock, and an indigo-accented identity.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 450ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">06</span>
+      <h3 class="cs-process-title">Prototype</h3>
+    </div>
+    <p class="cs-process-desc">Connect the main screens and refine navigation, interactions, and the overall experience.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USER RESEARCH ============ -->
+<section class="cs-research">
+  <h2 class="cs-section-title reveal" data-reveal="up">User Research</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The research focused on understanding what students expect from an app for studying together.</p>
+
+  <ul class="cs-bullet-list reveal" data-reveal="up" style="--reveal-delay: 160ms">
+    <li>How do students study today, alone or with friends?</li>
+    <li>What makes a student comfortable sharing their location?</li>
+    <li>What distracts students during group study?</li>
+    <li>How do students know whether they are making progress?</li>
+    <li>What would make a student report or block someone?</li>
+  </ul>
+
+  <h3 class="cs-subheading cs-findings-heading reveal" data-reveal="up" style="--reveal-delay: 240ms">Key Findings</h3>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-findings-grid">
+  <div class="cs-finding-item reveal" data-reveal="up">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/studysprint/peer.svg" alt="">
+      <h3 class="cs-finding-title">Peer Motivation</h3>
+    </div>
+    <p class="cs-finding-desc">Students stay more consistent when they can see others studying at the same time, even without talking.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 90ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/studysprint/privacy.svg" alt="">
+      <h3 class="cs-finding-title">Privacy First</h3>
+    </div>
+    <p class="cs-finding-desc">Students share location only when it is approximate, temporary, and easy to switch off.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 180ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/studysprint/entry.svg" alt="">
+      <h3 class="cs-finding-title">Fast Group Entry</h3>
+    </div>
+    <p class="cs-finding-desc">Joining a study group must take only a few taps. Long forms and unclear groups make students give up.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 270ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/studysprint/focus.svg" alt="">
+      <h3 class="cs-finding-title">Focus Over Noise</h3>
+    </div>
+    <p class="cs-finding-desc">Timers and quiet rooms work better than feeds and busy chats when students are trying to study.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 360ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/studysprint/progress.svg" alt="">
+      <h3 class="cs-finding-title">Visible Progress</h3>
+    </div>
+    <p class="cs-finding-desc">Streaks and weekly totals motivate students, as long as they feel encouraging rather than judging.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 450ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/studysprint/safety.svg" alt="">
+      <h3 class="cs-finding-title">Safety Within Reach</h3>
+    </div>
+    <p class="cs-finding-desc">Report and block need to be reachable from profiles and chats, without searching through settings.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ COMPETITIVE ANALYSIS ============ -->
+<section class="cs-compare">
+  <h2 class="cs-section-title reveal" data-reveal="up">Competitive Analysis</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">Rather than comparing against similar products, I reviewed the apps students already use to study together or stay focused, and checked which needs each of them actually meets.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-compare-table-wrap reveal" data-reveal="up">
+  <table class="cs-compare-table">
+    <thead>
+      <tr>
+        <th scope="col" class="cs-compare-corner">Criteria</th>
+        <th scope="col">Messenger</th>
+        <th scope="col">Discord</th>
+        <th scope="col">Forest</th>
+        <th scope="col">Study Sprint</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Group Video Rooms</th>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Nearby Study Partners</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Focus Timer</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Study Progress Stats</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Student Verification</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Built for Studying</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USER PERSONA ============ -->
+<section class="cs-persona">
+  <h2 class="cs-section-title reveal" data-reveal="up">User Persona</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The persona represents a typical Study Sprint student who is preparing for admission tests and wants steady study partners. It helps define the motivations, expectations, and pain points that shaped the app.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-persona-grid">
+
+  <!-- Row 1, Col 1: Image -->
+  <div class="cs-persona-image reveal" data-reveal="left">
+    <img src="images/studysprint/studysprint-user.jpg" alt="Arif Hossain, Study Sprint user persona">
+  </div>
+
+  <!-- Row 1, Col 2: Goals + Pain Points -->
+  <div class="cs-persona-side reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <div class="cs-persona-block cs-persona-goals">
+      <h3 class="cs-persona-heading">Goals</h3>
+      <ul class="cs-bullet-list">
+        <li>Find serious study partners for admission test prep.</li>
+        <li>Stay consistent with a daily study routine.</li>
+        <li>Join a focused group without a long setup.</li>
+        <li>See clearly how much he studies each week.</li>
+      </ul>
+    </div>
+
+    <div class="cs-persona-block cs-persona-pain">
+      <h3 class="cs-persona-heading">Pain Points</h3>
+      <ul class="cs-bullet-list">
+        <li>Studies alone at home and loses motivation.</li>
+        <li>Messenger study groups are full of noise and distractions.</li>
+        <li>Unsure about meeting strangers or sharing his location.</li>
+        <li>No simple way to track his study hours and streak.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Row 2, Col 1: Intro details -->
+  <div class="cs-persona-block cs-persona-intro reveal" data-reveal="up">
+    <h3 class="cs-persona-heading">Arif Hossain</h3>
+    <dl class="cs-persona-details">
+      <div class="cs-persona-detail-row"><dt>Age</dt><dd>18</dd></div>
+      <div class="cs-persona-detail-row"><dt>Gender</dt><dd>Male</dd></div>
+      <div class="cs-persona-detail-row"><dt>Occupation</dt><dd>HSC Student, Admission Candidate</dd></div>
+      <div class="cs-persona-detail-row"><dt>Location</dt><dd>Mirpur, Dhaka</dd></div>
+    </dl>
+  </div>
+
+  <!-- Row 2, Col 2: Background -->
+  <div class="cs-persona-block cs-persona-background reveal" data-reveal="up" style="--reveal-delay: 100ms">
+    <h3 class="cs-persona-heading">Background</h3>
+    <p class="cs-body">Arif is preparing for university admission tests after HSC. He studies mostly at home after coaching and wants regular study partners, but his friends live far away and online groups are full of distractions.</p>
+  </div>
+
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USER EMPATHY MAP ============ -->
+<section class="cs-empathy">
+  <h2 class="cs-section-title reveal" data-reveal="up">User Empathy Map</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The empathy map captures Arif's thoughts, words, behaviors, and emotions while looking for study partners and trying to stay consistent. It shows where the app can replace scattered chats with one focused space.</p>
+</section>
+
+<div class="cs-empathy-grid">
+
+  <!-- Row 1, Col 1: Thinks -->
+  <div class="cs-empathy-block cs-empathy-thinks reveal" data-reveal="up">
+    <h3 class="cs-empathy-heading">Thinks</h3>
+    <ul class="cs-bullet-list">
+      <li>Am I studying enough compared to others?</li>
+      <li>Can I trust someone I meet online?</li>
+      <li>I lose focus when I study alone.</li>
+      <li>I hope my friends join the same session.</li>
+      <li>Will my location stay safe?</li>
+    </ul>
+  </div>
+
+  <!-- Row 1, Col 2 (middle): empty spacer -->
+  <div class="cs-empathy-spacer cs-empathy-spacer-top"></div>
+
+  <!-- Row 1, Col 3: Says -->
+  <div class="cs-empathy-block cs-empathy-says reveal" data-reveal="up" style="--reveal-delay: 90ms">
+    <h3 class="cs-empathy-heading">Says</h3>
+    <ul class="cs-bullet-list">
+      <li>I want a serious study group for admission prep.</li>
+      <li>Who is studying near me right now?</li>
+      <li>Can I join without a long setup?</li>
+      <li>I don't want everyone to see where I am.</li>
+      <li>Show me how much I studied this week.</li>
+    </ul>
+  </div>
+
+  <!-- Row 2, Col 2 (middle): Center Image -->
+  <div class="cs-empathy-image-wrap reveal" data-reveal="fade" style="--reveal-delay: 150ms">
+    <div class="cs-empathy-image">
+      <img src="images/studysprint/studysprint-user.jpg" alt="Arif Hossain">
+    </div>
+  </div>
+
+  <!-- Row 3, Col 1: Does -->
+  <div class="cs-empathy-block cs-empathy-does reveal" data-reveal="up" style="--reveal-delay: 180ms">
+    <h3 class="cs-empathy-heading">Does</h3>
+    <ul class="cs-bullet-list">
+      <li>Studies at home after coaching, often alone.</li>
+      <li>Scrolls Messenger groups for notes and updates.</li>
+      <li>Uses a phone timer to track study blocks.</li>
+      <li>Asks friends to join video calls.</li>
+      <li>Keeps a notebook of weekly study hours.</li>
+    </ul>
+  </div>
+
+  <!-- Row 3, Col 2 (middle): empty spacer -->
+  <div class="cs-empathy-spacer cs-empathy-spacer-bottom"></div>
+
+  <!-- Row 3, Col 3: Feels -->
+  <div class="cs-empathy-block cs-empathy-feels reveal" data-reveal="up" style="--reveal-delay: 270ms">
+    <h3 class="cs-empathy-heading">Feels</h3>
+    <ul class="cs-bullet-list">
+      <li>Motivated when others are studying too.</li>
+      <li>Distracted by constant chat notifications.</li>
+      <li>Cautious about meeting new people.</li>
+      <li>Proud when his streak keeps going.</li>
+      <li>Supported when a group studies together.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ TYPOGRAPHY ============ -->
+<section class="cs-typography">
+  <h2 class="cs-section-title reveal" data-reveal="up">Typography</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The typography system was designed to feel friendly, calm, and easy to read on a small phone screen. Inter is used throughout, with clear weight and size differences for headings, card details, and body text. Large numerals make timers and stats easy to read at a glance.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-typography-card reveal" data-reveal="up">
+  <img class="cs-typography-image" src="images/studysprint/typography.png" alt="Typography system showing heading and body text styles">
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USED COLORS ============ -->
+<section class="cs-colors">
+  <h2 class="cs-section-title reveal" data-reveal="up">Used Colors</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The Study Sprint color system pairs a confident indigo with soft greys. Indigo marks actions, active states, and key highlights, while light greys keep cards, forms, and text clean. Glass layers sit over a soft lavender gradient to keep the interface calm.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-colors-grid">
+
+  <div class="cs-colors-card reveal" data-reveal="up">
+    <h3 class="cs-colors-title">Indigo</h3>
+    <img class="cs-colors-image" src="images/studysprint/color-indigo.png" alt="Indigo color palette from light to darker">
+  </div>
+
+  <div class="cs-colors-card reveal" data-reveal="up" style="--reveal-delay: 100ms">
+    <h3 class="cs-colors-title">Grey</h3>
+    <img class="cs-colors-image" src="images/studysprint/color-grey.png" alt="Gray color palette from light to darker">
+  </div>
+
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ MID-FIDELITY WIREFRAME ============ -->
+<section class="cs-wireframe">
+  <h2 class="cs-section-title reveal" data-reveal="up">Mid-Fidelity Wireframe</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The wireframing stage defined the structure of the home, discover, groups, stats, and profile tabs. It set the shared bottom navigation, card layouts, filters, and the chat and live room flows before any visual styling was applied.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-wireframe-wrap reveal" data-reveal="up">
+  <img class="cs-wireframe-image" src="images/studysprint/wireframe.png" alt="Mid-fidelity wireframe">
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USER INTERFACE ============ -->
+<section class="cs-ui">
+  <h2 class="cs-section-title reveal" data-reveal="up">User Interface</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The final interface brings together glass cards, a floating navigation dock, and an indigo-accented identity to make the app feel calm, modern, and focused.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 01 -->
+<div class="cs-ui-row">
+  <div class="cs-ui-screen reveal" data-reveal="left">
+    <img src="images/studysprint/screen-1.jpg" alt="Study Sprint home, messages, notifications, and solo focus screens">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">01 -</span>
+      <h3 class="cs-ui-title">One Home for Your Study Day</h3>
+    </div>
+    <p class="cs-ui-desc">Home shows who is studying nearby, your groups, and a one-tap start for studying. Messages, notifications, and the Solo Focus timer sit one tap away in the header, so students can move from planning to studying quickly.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 02 -->
+<div class="cs-ui-row cs-ui-row-reverse">
+  <div class="cs-ui-screen reveal" data-reveal="right">
+    <img src="images/studysprint/screen-2.jpg" alt="Nearby map, peer profile, chat, and report screens">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="left" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">02 -</span>
+      <h3 class="cs-ui-title">Nearby Peers Without Giving Up Privacy</h3>
+    </div>
+    <p class="cs-ui-desc">The Nearby map shows an approximate 500 m zone, with locate and Ghost mode buttons always on the map. Peer profiles show mutual groups, chats carry study invites, and Report and Block are one tap from both.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 03 -->
+<div class="cs-ui-row">
+  <div class="cs-ui-screen reveal" data-reveal="left">
+    <img src="images/studysprint/screen-3.jpg" alt="Explore groups, create group, group detail, and live room screens">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">03 -</span>
+      <h3 class="cs-ui-title">Pods for Every Study Goal</h3>
+    </div>
+    <p class="cs-ui-desc">My groups sit on top of the Groups tab, with new pods to explore below. A pod page shows the next sprint countdown and agenda, and the dark live room keeps mic, camera, and raise hand within thumb reach.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 04 -->
+<div class="cs-ui-row cs-ui-row-reverse">
+  <div class="cs-ui-screen reveal" data-reveal="right">
+    <img src="images/studysprint/screen-4.jpg" alt="Study insights, profile, settings, and safety and privacy screens">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="left" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">04 -</span>
+      <h3 class="cs-ui-title">Progress and Profile in Your Control</h3>
+    </div>
+    <p class="cs-ui-desc">Stats turn study time into a weekly chart, a streak, and a subject split. Profile, settings, and Safety & Privacy keep verification and location visibility in the student's hands, with plain labels for every choice.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ WHAT THIS PROJECT TAUGHT ME ============ -->
+<section class="cs-lessons">
+  <h2 class="cs-section-title cs-lessons-title reveal" data-reveal="up">What This Project Taught Me</h2>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-lessons-grid">
+
+  <div class="cs-lessons-item reveal" data-reveal="up">
+    <div class="cs-lessons-head">
+      <span class="cs-lessons-number">01</span>
+      <h3 class="cs-lessons-item-title">Privacy Is a Feature</h3>
+    </div>
+    <p class="cs-lessons-desc">Clear limits on location, like an approximate zone and a Ghost mode, made the Nearby idea feel safe enough to use.</p>
+  </div>
+
+  <div class="cs-lessons-item reveal" data-reveal="up" style="--reveal-delay: 120ms">
+    <div class="cs-lessons-head">
+      <span class="cs-lessons-number">02</span>
+      <h3 class="cs-lessons-item-title">Glass Needs Contrast</h3>
+    </div>
+    <p class="cs-lessons-desc">Translucent cards only worked once inner elements stayed flat and text contrast was checked on every screen.</p>
+  </div>
+
+  <div class="cs-lessons-item reveal" data-reveal="up" style="--reveal-delay: 240ms">
+    <div class="cs-lessons-head">
+      <span class="cs-lessons-number">03</span>
+      <h3 class="cs-lessons-item-title">Design for Focus</h3>
+    </div>
+    <p class="cs-lessons-desc">Keeping each screen simple, with large timer numerals and calm colors, helped the app support study instead of distracting from it.</p>
+  </div>
+
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ================= Start A Project (Contact) ================= -->
+<section class="contact" id="contact">
+
+  <div class="contact-header reveal" data-reveal="up">
+    <h2 class="contact-title">Thanks for Reading Until the next one.</h2>
+    <p class="contact-subtitle">If Study Sprint made you curious about how it was designed, or you're working on something that could use a similar hand - I'd love to hear from you.</p>
+  </div>
+
+  <div class="work-line-full reveal" data-reveal="fade" style="--reveal-delay: 100ms"></div>
+
+  <div class="contact-card reveal" data-reveal="up" style="--reveal-delay: 150ms">
+    <h3 class="contact-card-title">Say Hello..!</h3>
+
+    <form class="contact-form" id="contactForm" novalidate>
+
+      <p class="contact-line">
+        Hello Ieamin, myself
+        <input
+          type="text"
+          name="name"
+          id="contactName"
+          class="contact-input contact-input--inline"
+          placeholder="your full name..."
+          autocomplete="name"
+          required
+        >
+      </p>
+
+      <p class="contact-line contact-line--block">
+        and I am looking for someone to help me. I am giving you a short description about my project:
+      </p>
+      <textarea
+        name="description"
+        id="contactDescription"
+        class="contact-input contact-input--block"
+        placeholder="short description of your project..."
+        rows="1"
+        required
+      ></textarea>
+
+      <p class="contact-line contact-line--block">
+        I am giving you my E-mail address to connect with me.
+      </p>
+      <input
+        type="email"
+        name="email"
+        id="contactEmail"
+        class="contact-input contact-input--block"
+        placeholder="your Gmail account"
+        autocomplete="email"
+        required
+      >
+
+      <p class="contact-form-note" id="contactFormNote" aria-live="polite"></p>
+
+      <button type="submit" class="btn btn-primary glass-sweep contact-submit" id="contactSubmit">
+        Send
+      </button>
+
+    </form>
+  </div>
+
+</section>
+
+<!-- ================= Footer ================= -->
+<footer class="site-footer" id="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+      <div class="footer-col footer-col--contacts reveal" data-reveal="up" style="--reveal-delay: 0ms">
+        <h4 class="footer-heading">Contacts</h4>
+
+        <ul class="footer-contact-list">
+
+          <li class="footer-contact-item reveal" data-reveal="up" style="--reveal-delay: 60ms">
+            <span class="footer-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3.5 2h2.2l1 3-1.4 1.1a8.5 8.5 0 0 0 3.6 3.6L10 8.3l3 1v2.2c0 .7-.6 1.3-1.3 1.2C6.7 12.3 3.7 9.3 3.3 4.3 3.2 3.6 2.8 2 3.5 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="footer-contact-text">
+              <span class="footer-contact-label">Mobile No:</span>
+              <a class="footer-contact-value" href="tel:+8801998679068">+8801 99867 9068</a>
+            </span>
+          </li>
+
+          <li class="footer-contact-item reveal" data-reveal="up" style="--reveal-delay: 120ms">
+            <span class="footer-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 2.5a5.5 5.5 0 0 0-4.7 8.3L2.5 13.5l2.8-.8A5.5 5.5 0 1 0 8 2.5Z" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M5.8 5.9c.2-.4.5-.4.7-.4h.5c.2 0 .4 0 .5.4l.3.9c0 .2 0 .3-.1.4l-.4.5c-.1.1-.1.3 0 .4.4.7 1 1.3 1.7 1.7.1.1.3.1.4 0l.5-.4c.1-.1.2-.1.4-.1l.9.3c.3.1.4.3.4.5v.5c0 .3-.2.6-.5.7-1.7.5-4-.7-5.1-1.8C4.9 8.9 3.7 6.6 4.2 4.9c.1-.3.4-.5.7-.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="footer-contact-text">
+              <span class="footer-contact-label">WhatsApp:</span>
+              <a class="footer-contact-value" href="https://wa.me/8801640830345" target="_blank" rel="noopener">+8801 64083 0345</a>
+            </span>
+          </li>
+
+          <li class="footer-contact-item reveal" data-reveal="up" style="--reveal-delay: 180ms">
+            <span class="footer-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <rect x="2" y="3.5" width="12" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M2.5 4.2 8 8.5l5.5-4.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="footer-contact-text">
+              <span class="footer-contact-label">E-mail:</span>
+              <a class="footer-contact-value" href="mailto:ieaminislamsifat12@gmail.com">ieaminislamsifat12@gmail.com</a>
+            </span>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="footer-col reveal" data-reveal="up" style="--reveal-delay: 90ms">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#about">About me</a></li>
+          <li><a href="index.html#process">Working Process</a></li>
+          <li><a href="index.html#work">Projects</a></li>
+          <li><a href="index.html#services">Services</a></li>
+        </ul>
+        
+      </div>
+
+      <div class="footer-col reveal" data-reveal="up" style="--reveal-delay: 180ms">
+        <h4 class="footer-heading">Social Media</h4>
+        <ul class="footer-links">
+          <li><a href="https://www.linkedin.com/in/ieamin-islam-sifat/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.behance.net/ieaminsifat47" target="_blank" rel="noopener">Behance</a></li>
+          <li><a href="https://www.facebook.com/ieamin.sifat" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+
+      <button class="footer-top-btn reveal" data-reveal="fade" style="--reveal-delay: 260ms" id="backToTopBtn" type="button" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+          <path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <div class="footer-divider reveal" data-reveal="fade" style="--reveal-delay: 100ms"></div>
+
+    <div class="footer-bottom reveal" data-reveal="up" style="--reveal-delay: 100ms">
+      <p>&copy; <span id="footerYear">2025</span> - Ieamin Islam Sifat. All rights reserved.</p>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/case_study_motion.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/responsive.js"></script>
+<script>
+  function csGoBack() {
+    if (document.referrer && document.referrer.includes(window.location.host)) {
+      history.back();
+    } else {
+      window.location.href = 'index.html#works';
+    }
+  }
+  document.getElementById('csBackBtn').addEventListener('click', csGoBack);
+
+  const csBackBtnMobile = document.getElementById('csBackBtnMobile');
+  if (csBackBtnMobile) {
+    csBackBtnMobile.addEventListener('click', csGoBack);
+  }
+</script>
+<script src="js/contact_footer.js"></script>
+
+</body>
+</html>

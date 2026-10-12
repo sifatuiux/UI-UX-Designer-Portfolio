@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name | UI/UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/case_study.css">
+  <link rel="stylesheet" href="css/cursor.css">
+</head>
+
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar">
+  <a href="index.html" class="logo">
+    <img src="images/hero/Hero Logo.svg" alt="Ieamin Islam Sifat logo">
+  </a>
+
+  <div class="nav-links">
+    <a href="index.html#works">Works <span class="count">(20)</span></a>
+    <a href="index.html#services">Services <span class="count">(5)</span></a>
+  </div>
+
+   <button type="button" class="btn btn-primary glass-sweep cs-back-btn" id="csBackBtn">Go Back</button>
+</nav>
+
+<!-- ============ NAV (mobile) ============ -->
+<nav class="navbar-mobile" id="mobileNavbar">
+  <a href="index.html" class="logo"><img src="images/hero/Hero Logo.svg" alt="Ieamin Islam Sifat logo"></a>
+  <button class="burger-btn" id="burgerBtn" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ Mobile Menu ============ -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" data-menu-close></div>
+  <div class="mobile-menu-panel">
+    <ul class="mobile-menu-links">
+      <li><a href="index.html#works" class="mobile-menu-link" data-menu-link>Works <span class="count">(20)</span></a></li>
+      <li><a href="index.html#services" class="mobile-menu-link" data-menu-link>Services <span class="count">(5)</span></a></li>
+    </ul>
+    <button type="button" class="btn btn-primary glass-sweep mobile-menu-contact" id="csBackBtnMobile" data-menu-close>Go Back</button>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ CASE STUDY HERO ============ -->
+<section class="cs-hero">
+  <h1 class="cs-hero-title reveal" data-reveal="up">
+    <span class="cs-hero-title-accent">CSE Connect</span> – CUCSEAA
+  </h1>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-hero-image reveal" data-reveal="fade" style="--reveal-delay: 100ms">
+  <img src="images/cucseaa/cucseaa-hero.jpg" alt="CSE Connect – CUCSEAA">
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+</section>
+
+<!-- ============ PRODUCT OVERVIEW ============ -->
+<section class="cs-overview">
+  <h2 class="cs-section-title reveal" data-reveal="up">Product Overview</h2>
+  <ul class="cs-bullet-list reveal" data-reveal="up" style="--reveal-delay: 100ms">
+    <li>CSE Connect is a student and alumni management platform designed for the Computer Science & Engineering department of City University, Bangladesh, and its alumni association, CUCSEAA.</li>
+    <li>Students and alumni are both primary users. The platform brings jobs, events, mentorship, memories, and community requests into one verified space instead of scattered social media groups.</li>
+    <li>Every profile, post, and event is reviewed by an admin, so members can trust who they are talking to and what they are reading.</li>
+    <li>The design balances a warm community feel, professional networking, and simple administration across a responsive website.</li>
+  </ul>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ QUICK STATS ============ -->
+<section class="cs-stats">
+  <div class="cs-stat reveal" data-reveal="up">
+    <span class="cs-stat-label">Role</span>
+    <span class="cs-stat-value">UI/UX Designer</span>
+  </div>
+
+  <div class="cs-stat reveal" data-reveal="up" style="--reveal-delay: 80ms">
+    <span class="cs-stat-label">Client</span>
+    <span class="cs-stat-value">CUCSEAA, City University</span>
+  </div>
+
+  <div class="cs-stat reveal" data-reveal="up" style="--reveal-delay: 160ms">
+    <span class="cs-stat-label">Duration</span>
+    <span class="cs-stat-value">5 Weeks</span>
+  </div>
+
+  <div class="cs-stat reveal" data-reveal="up" style="--reveal-delay: 240ms">
+  <span class="cs-stat-label">Live Site</span>
+  <span class="cs-stat-value">
+    <a href="#" target="_blank" style="color: inherit; text-decoration: none;">
+      CSEConnect.Design
+    </a>
+  </span>
+</div>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ PROBLEM STATEMENT ============ -->
+<section class="cs-problem">
+  <div class="cs-problem-text reveal" data-reveal="left">
+    <h2 class="cs-section-title">Problem Statement</h2>
+
+    <p class="cs-body">
+      CSE graduates and current students at City University mostly connect through Facebook groups, WhatsApp chats, and personal contacts. Information gets buried, nobody can confirm who is genuine, and many alumni slowly lose touch with the department.
+    </p>
+    <p class="cs-body">The challenge was to create a platform that could:</p>
+
+    <ul class="cs-bullet-list">
+      <li>Give students and alumni equal access to one shared community</li>
+      <li>Verify every member before granting access</li>
+      <li>Make jobs, events, and announcements easy to find and act on</li>
+      <li>Help students reach senior alumni for guidance and referrals</li>
+      <li>Preserve the department's memories and history in one place</li>
+      <li>Reduce the manual workload of the alumni association and admin team</li>
+    </ul>
+
+    <h3 class="cs-subheading">Core Problem</h3>
+    <p class="cs-body">
+      How might we build a trusted, admin-managed platform where students and alumni can connect for careers, events, and community support without losing the warmth of a department family?
+    </p>
+  </div>
+
+<div class="cs-problem-graphic reveal" data-reveal="right" style="--reveal-delay: 120ms" aria-hidden="true">
+  <img src="images/cucseaa/problem.png" alt="problem">
+</div>
+
+</section>
+
+<!-- ============ POSSIBLE SOLUTION ============ -->
+<section class="cs-solution">
+  <div class="cs-solution-image reveal" data-reveal="left">
+    <img src="images/cucseaa/cucseaa-solution.jpg" alt="CSE Connect solution mockup on monitor">
+  </div>
+
+  <div class="cs-solution-text reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <h2 class="cs-section-title">Possible Solution</h2>
+
+    <p class="cs-body">
+      The proposed solution was a centralized community website that treats students and alumni as equal members while keeping every action verified and organized.
+    </p>
+    <p class="cs-body">Key solution areas included:</p>
+
+    <ul class="cs-bullet-list">
+      <li>A welcoming home page with live community stats and clear entry points</li>
+      <li>Verified alumni directory with search by name, batch, or ID</li>
+      <li>Event listings with quick registration and clear dates, venues, and attendance</li>
+      <li>A community feed for jobs, job-wanted posts, announcements, and urgent blood requests</li>
+      <li>A memories gallery to celebrate reunions, seminars, and campus life</li>
+      <li>Role-based profiles with separate student and alumni information</li>
+    </ul>
+
+    <p class="cs-body">
+      This approach lets members feel part of the community first, then gives them the tools to find opportunities, people, and support when they need it.
+    </p>
+  </div>
+</section>
+
+<!-- ============ DESIGN PROCESS ============ -->
+<section class="cs-process">
+  <h2 class="cs-section-title reveal" data-reveal="up">Design Process</h2>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-process-grid">
+  <div class="cs-process-item reveal" data-reveal="up">
+    <div class="cs-process-head">
+      <span class="cs-process-number">01</span>
+      <h3 class="cs-process-title">User Research</h3>
+    </div>
+    <p class="cs-process-desc">Understand how students and alumni currently connect, and what frustrates them about it.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 90ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">02</span>
+      <h3 class="cs-process-title">User Flow & IA</h3>
+    </div>
+    <p class="cs-process-desc">Map registration, verification, and the journey from joining to registering, and connecting.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 180ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">03</span>
+      <h3 class="cs-process-title">Design System</h3>
+    </div>
+    <p class="cs-process-desc">Define typography, colors, spacing, cards, states, and responsive rules for the whole platform.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 270ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">04</span>
+      <h3 class="cs-process-title">Wireframe</h3>
+    </div>
+    <p class="cs-process-desc">Structure each page, content hierarchy, and role-based differences before visual styling.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 360ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">05</span>
+      <h3 class="cs-process-title">UI Design</h3>
+    </div>
+    <p class="cs-process-desc">Create polished screens with consistent cards, imagery, and a clear red-accented visual identity.</p>
+  </div>
+
+  <div class="cs-process-item reveal" data-reveal="up" style="--reveal-delay: 450ms">
+    <div class="cs-process-head">
+      <span class="cs-process-number">06</span>
+      <h3 class="cs-process-title">Prototype</h3>
+    </div>
+    <p class="cs-process-desc">Connect the main screens and refine navigation, interactions, and the overall experience.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USER RESEARCH ============ -->
+<section class="cs-research">
+  <h2 class="cs-section-title reveal" data-reveal="up">User Research</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The research focused on understanding what students and alumni expect from a department community platform.</p>
+
+  <ul class="cs-bullet-list reveal" data-reveal="up" style="--reveal-delay: 160ms">
+    <li>How do students and alumni stay in touch today?</li>
+    <li>What makes members trust a post, a job, or a profile?</li>
+    <li>How do students find seniors for career advice?</li>
+    <li>What stops alumni from staying active after graduation?</li>
+    <li>What kind of urgent help does the community need most?</li>
+  </ul>
+
+  <h3 class="cs-subheading cs-findings-heading reveal" data-reveal="up" style="--reveal-delay: 240ms">Key Findings</h3>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-findings-grid">
+  <div class="cs-finding-item reveal" data-reveal="up">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/cucseaa/trust.svg" alt="">
+      <h3 class="cs-finding-title">Verified Trust</h3>
+    </div>
+    <p class="cs-finding-desc">Members are more willing to engage when every profile and post is confirmed by an admin as a genuine City University CSE student or alumnus.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 90ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/cucseaa/career.svg" alt="">
+      <h3 class="cs-finding-title">Career Access</h3>
+    </div>
+    <p class="cs-finding-desc">Students want job openings and referrals from people in their own network, and alumni are happy to post them when it takes little effort.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 180ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/cucseaa/events.svg" alt="">
+      <h3 class="cs-finding-title">Easy Events</h3>
+    </div>
+    <p class="cs-finding-desc">Events announced through posters and group chats are easy to miss. Clear dates, venues, and one-tap registration increase participation.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 270ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/cucseaa/people.svg" alt="">
+      <h3 class="cs-finding-title">Findable People</h3>
+    </div>
+    <p class="cs-finding-desc">Searching by name, batch, or student ID is how members actually look for classmates and seniors, so the directory has to support it.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 360ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/cucseaa/memories.svg" alt="">
+      <h3 class="cs-finding-title">Shared Memories</h3>
+    </div>
+    <p class="cs-finding-desc">Reunion and campus photos bring alumni back to the platform and give current students a sense of the department's history.</p>
+  </div>
+
+  <div class="cs-finding-item reveal" data-reveal="up" style="--reveal-delay: 450ms">
+    <div class="cs-finding-head">
+      <img class="cs-finding-icon" src="icons/cucseaa/help.svg" alt="">
+      <h3 class="cs-finding-title">Help When Needed</h3>
+    </div>
+    <p class="cs-finding-desc">The community already uses group chats for urgent needs like blood requests. A structured format makes these posts faster to read and act on.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ COMPETITIVE ANALYSIS ============ -->
+<section class="cs-compare">
+  <h2 class="cs-section-title reveal" data-reveal="up">Competitive Analysis</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">Rather than comparing against similar products, I reviewed the platforms the CSE community already uses to stay connected, and checked which needs each of them actually meets.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-compare-table-wrap reveal" data-reveal="up">
+  <table class="cs-compare-table">
+    <thead>
+      <tr>
+        <th scope="col" class="cs-compare-corner">Criteria</th>
+        <th scope="col">Facebook</th>
+        <th scope="col">LinkedIn</th>
+        <th scope="col">WhatsApp</th>
+        <th scope="col">CSE Connect</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Admin-Verified Members</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Batch-Based Directory</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Event Registration</th>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Job Sharing</th>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Blood Requests</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Department-Only Community</th>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-no">No</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+        <td><span class="cs-yes">Yes</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USER PERSONA ============ -->
+<section class="cs-persona">
+  <h2 class="cs-section-title reveal" data-reveal="up">User Persona</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The persona represents a typical student member of CSE Connect who wants early career guidance from alumni. It helps define the motivations, expectations, and pain points that shaped the platform, alongside the alumni needs identified in research.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-persona-grid">
+
+  <!-- Row 1, Col 1: Image -->
+  <div class="cs-persona-image reveal" data-reveal="left">
+    <img src="images/cucseaa/cucseaa-user.jpg" alt="Sumaiya Akter, CSE Connect user persona">
+  </div>
+
+  <!-- Row 1, Col 2: Goals + Pain Points -->
+  <div class="cs-persona-side reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <div class="cs-persona-block cs-persona-goals">
+      <h3 class="cs-persona-heading">Goals</h3>
+      <ul class="cs-bullet-list">
+        <li>Get honest career advice from seniors and alumni.</li>
+        <li>Find genuine internships and job openings early.</li>
+        <li>Never miss department events, workshops, and seminars.</li>
+        <li>Build a professional network before graduating.</li>
+      </ul>
+    </div>
+
+    <div class="cs-persona-block cs-persona-pain">
+      <h3 class="cs-persona-heading">Pain Points</h3>
+      <ul class="cs-bullet-list">
+        <li>Information is spread across many Facebook and WhatsApp groups.</li>
+        <li>Hard to tell whether a job post or profile is genuine.</li>
+        <li>Difficult to find and approach alumni working in her field.</li>
+        <li>Event details are often shared late or get buried in chats.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Row 2, Col 1: Intro details -->
+  <div class="cs-persona-block cs-persona-intro reveal" data-reveal="up">
+    <h3 class="cs-persona-heading">Sumaiya Akter</h3>
+    <dl class="cs-persona-details">
+      <div class="cs-persona-detail-row"><dt>Age</dt><dd>20</dd></div>
+      <div class="cs-persona-detail-row"><dt>Gender</dt><dd>Female</dd></div>
+      <div class="cs-persona-detail-row"><dt>Occupation</dt><dd>CSE Student, 2nd Year</dd></div>
+      <div class="cs-persona-detail-row"><dt>Location</dt><dd>Savar, Dhaka</dd></div>
+    </dl>
+  </div>
+
+  <!-- Row 2, Col 2: Background -->
+  <div class="cs-persona-block cs-persona-background reveal" data-reveal="up" style="--reveal-delay: 100ms">
+    <h3 class="cs-persona-heading">Background</h3>
+    <p class="cs-body">Sumaiya is a motivated second-year student who wants to start preparing for a tech career early. She is unsure whether to focus on web development, competitive programming, or data science, and she trusts advice from people who studied in the same department.</p>
+  </div>
+
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USER EMPATHY MAP ============ -->
+<section class="cs-empathy">
+  <h2 class="cs-section-title reveal" data-reveal="up">User Empathy Map</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The empathy map captures Sumaiya's thoughts, words, behaviors, and emotions while looking for guidance, jobs, and events in the department community. It shows where the platform can replace scattered channels with one trusted space.</p>
+</section>
+
+<div class="cs-empathy-grid">
+
+  <!-- Row 1, Col 1: Thinks -->
+  <div class="cs-empathy-block cs-empathy-thinks reveal" data-reveal="up">
+    <h3 class="cs-empathy-heading">Thinks</h3>
+    <ul class="cs-bullet-list">
+      <li>Which career path should I focus on first?</li>
+      <li>Will seniors actually reply if I message them?</li>
+      <li>Is this job post genuine?</li>
+      <li>I don't want to miss another event.</li>
+      <li>Am I preparing early enough?</li>
+    </ul>
+  </div>
+
+  <!-- Row 1, Col 2 (middle): empty spacer -->
+  <div class="cs-empathy-spacer cs-empathy-spacer-top"></div>
+
+  <!-- Row 1, Col 3: Says -->
+  <div class="cs-empathy-block cs-empathy-says reveal" data-reveal="up" style="--reveal-delay: 90ms">
+    <h3 class="cs-empathy-heading">Says</h3>
+    <ul class="cs-bullet-list">
+      <li>I need advice from seniors who have been through this.</li>
+      <li>Where can I find real openings from our own community?</li>
+      <li>Is this event open for my batch?</li>
+      <li>I want to see what alumni are doing now.</li>
+      <li>Everything should be in one place, not five groups.</li>
+    </ul>
+  </div>
+
+  <!-- Row 2, Col 2 (middle): Center Image -->
+  <div class="cs-empathy-image-wrap reveal" data-reveal="fade" style="--reveal-delay: 150ms">
+    <div class="cs-empathy-image">
+      <img src="images/cucseaa/cucseaa-user.jpg" alt="Sumaiya Akter">
+    </div>
+  </div>
+
+  <!-- Row 3, Col 1: Does -->
+  <div class="cs-empathy-block cs-empathy-does reveal" data-reveal="up" style="--reveal-delay: 180ms">
+    <h3 class="cs-empathy-heading">Does</h3>
+    <ul class="cs-bullet-list">
+      <li>Scrolls through Facebook and WhatsApp groups for updates.</li>
+      <li>Looks up seniors on LinkedIn to see where they work.</li>
+      <li>Asks friends about event dates and registration.</li>
+      <li>Saves job circulars to apply later.</li>
+      <li>Posts questions asking for guidance from seniors.</li>
+    </ul>
+  </div>
+
+  <!-- Row 3, Col 2 (middle): empty spacer -->
+  <div class="cs-empathy-spacer cs-empathy-spacer-bottom"></div>
+
+  <!-- Row 3, Col 3: Feels -->
+  <div class="cs-empathy-block cs-empathy-feels reveal" data-reveal="up" style="--reveal-delay: 270ms">
+    <h3 class="cs-empathy-heading">Feels</h3>
+    <ul class="cs-bullet-list">
+      <li>Curious about where alumni have built their careers.</li>
+      <li>Overwhelmed by information scattered everywhere.</li>
+      <li>Hesitant to approach seniors without an introduction.</li>
+      <li>Uncertain when posts cannot be verified.</li>
+      <li>Supported when a verified alumnus responds.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ TYPOGRAPHY ============ -->
+<section class="cs-typography">
+  <h2 class="cs-section-title reveal" data-reveal="up">Typography</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The typography system was designed to feel friendly, professional, and easy to scan across dense pages like directories and feeds. A clean modern sans-serif is used throughout, with clear weight and size differences for titles, card details, and body text. Section titles highlight one accent word in red to reinforce the brand.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-typography-card reveal" data-reveal="up">
+  <img class="cs-typography-image" src="images/cucseaa/typography.png" alt="Typography system showing heading and body text styles">
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USED COLORS ============ -->
+<section class="cs-colors">
+  <h2 class="cs-section-title reveal" data-reveal="up">Used Colors</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The CSE Connect color system pairs a confident red with soft grays and a deep charcoal. Red matches the CUCSEAA logo and marks actions, active states, and key highlights. Light grays keep cards and forms clean, while charcoal anchors the footer and the jobs section with strong contrast.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-colors-grid">
+
+  <div class="cs-colors-card reveal" data-reveal="up">
+    <h3 class="cs-colors-title">Red</h3>
+    <img class="cs-colors-image" src="images/cucseaa/color-red.png" alt="Red color palette from red-50 to red-900">
+  </div>
+
+  <div class="cs-colors-card reveal" data-reveal="up" style="--reveal-delay: 100ms">
+    <h3 class="cs-colors-title">Gray</h3>
+    <img class="cs-colors-image" src="images/cucseaa/color-gray.png" alt="Gray color palette from gray-50 to gray-900">
+  </div>
+
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ MID-FIDELITY WIREFRAME ============ -->
+<section class="cs-wireframe">
+  <h2 class="cs-section-title reveal" data-reveal="up">Mid-Fidelity Wireframe</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The wireframing stage defined the structure of the home, events, alumni, memories, posts, and profile pages. It set the shared header and footer, card layouts, filters, and the differences between student and alumni profiles before any visual styling was applied.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-wireframe-wrap reveal" data-reveal="up">
+  <img class="cs-wireframe-image" src="images/cucseaa/wireframe.png" alt="Mid-fidelity wireframe">
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ USER INTERFACE ============ -->
+<section class="cs-ui">
+  <h2 class="cs-section-title reveal" data-reveal="up">User Interface</h2>
+  <p class="cs-body reveal" data-reveal="up" style="--reveal-delay: 80ms">The final interface brings together a consistent card system, real community photography, and a red-accented identity to make the platform feel official yet welcoming.</p>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 01 -->
+<div class="cs-ui-row">
+  <div class="cs-ui-screen reveal" data-reveal="left">
+    <img src="images/cucseaa/screen-1.jpg" alt="CSE Connect home page with hero, feature cards, jobs, and success stories">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">01 -</span>
+      <h3 class="cs-ui-title">A Front Door for the Whole Department</h3>
+    </div>
+    <p class="cs-ui-desc">The home page opens with the CUCSEAA logo and live community numbers, then walks through six feature cards, a dark jobs section, and alumni success stories. New visitors understand what the platform offers before they scroll far.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 02 -->
+<div class="cs-ui-row cs-ui-row-reverse">
+  <div class="cs-ui-screen reveal" data-reveal="right">
+    <img src="images/cucseaa/screen-2.jpg" alt="Events page with next event highlight and all events grid">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="left" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">02 -</span>
+      <h3 class="cs-ui-title">Events Without the Poster Hunt</h3>
+    </div>
+    <p class="cs-ui-desc">One large card shows the very next event, followed by a grid of upcoming ones. Each card carries a red date badge, venue, time, and registration count, so members can decide in a glance and register right away.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 03 -->
+<div class="cs-ui-row">
+  <div class="cs-ui-screen reveal" data-reveal="left">
+    <img src="images/cucseaa/screen-3.jpg" alt="Alumni page with executive committee and searchable directory">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">03 -</span>
+      <h3 class="cs-ui-title">Finding People, Not Scrolling Lists</h3>
+    </div>
+    <p class="cs-ui-desc">The executive committee carousel puts faces to the association, while the directory lets members search by name, batch, or ID. Cards show graduation year, role, company, and location, with social links ready for outreach.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 04 -->
+<div class="cs-ui-row cs-ui-row-reverse">
+  <div class="cs-ui-screen reveal" data-reveal="right">
+    <img src="images/cucseaa/screen-4.jpg" alt="Memories page with masonry photo gallery">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="left" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">04 -</span>
+      <h3 class="cs-ui-title">Twenty Years in One Gallery</h3>
+    </div>
+    <p class="cs-ui-desc">A masonry grid of reunions, sports days, and convocations turns years of events into a single scroll. Hovering a photo reveals its event name, date, and place, and members can add their own through Share a Memory.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 05 -->
+<div class="cs-ui-row">
+  <div class="cs-ui-screen reveal" data-reveal="left">
+    <img src="images/cucseaa/screen-5.jpg" alt="Community posts feed with category filters">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">05 -</span>
+      <h3 class="cs-ui-title">One Feed, Many Kinds of Need</h3>
+    </div>
+    <p class="cs-ui-desc">Filters for Hiring, Job Wanted, Need Blood, Announcement, and General keep the feed easy to sort. Role and category tags show who is posting and why, and urgent blood requests use a structured layout so the key details stand out at once.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 06 -->
+<div class="cs-ui-row cs-ui-row-reverse">
+  <div class="cs-ui-screen reveal" data-reveal="right">
+    <img src="images/cucseaa/screen-6.jpg" alt="Profile settings for student and alumni accounts">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="left" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">06 -</span>
+      <h3 class="cs-ui-title">Profiles That Fit the Person</h3>
+    </div>
+    <p class="cs-ui-desc">Students and alumni share the same settings layout, but alumni get an extra Professional Info tab for company, role, and location. A summary card at the top shows the details other members will see, so nothing surprises the user.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- Row 07 -->
+<div class="cs-ui-row">
+  <div class="cs-ui-screen reveal" data-reveal="left">
+    <img src="images/cucseaa/screen-7.jpg" alt="Privacy Policy and Terms of Use pages">
+  </div>
+  <div class="cs-ui-text reveal" data-reveal="right" style="--reveal-delay: 120ms">
+    <div class="cs-ui-head">
+      <span class="cs-ui-number">07 -</span>
+      <h3 class="cs-ui-title">Trust in Plain Language</h3>
+    </div>
+    <p class="cs-ui-desc">The privacy and terms pages use a contents sidebar and numbered sections so members can jump to what they need. Version and update date are shown up front, and the copy explains data use without legal jargon.</p>
+  </div>
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ============ WHAT THIS PROJECT TAUGHT ME ============ -->
+<section class="cs-lessons">
+  <h2 class="cs-section-title cs-lessons-title reveal" data-reveal="up">What This Project Taught Me</h2>
+</section>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<div class="cs-lessons-grid">
+
+  <div class="cs-lessons-item reveal" data-reveal="up">
+    <div class="cs-lessons-head">
+      <span class="cs-lessons-number">01</span>
+      <h3 class="cs-lessons-item-title">Two Users, One Experience</h3>
+    </div>
+    <p class="cs-lessons-desc">Students and alumni needed the same layout, with differences shown through tags and profile fields rather than separate designs.</p>
+  </div>
+
+  <div class="cs-lessons-item reveal" data-reveal="up" style="--reveal-delay: 120ms">
+    <div class="cs-lessons-head">
+      <span class="cs-lessons-number">02</span>
+      <h3 class="cs-lessons-item-title">Verification Builds Community</h3>
+    </div>
+    <p class="cs-lessons-desc">Admin approval and visible role tags gave members the confidence to post, apply, and reach out to people they had never met.</p>
+  </div>
+
+  <div class="cs-lessons-item reveal" data-reveal="up" style="--reveal-delay: 240ms">
+    <div class="cs-lessons-head">
+      <span class="cs-lessons-number">03</span>
+      <h3 class="cs-lessons-item-title">Design for Urgent Moments</h3>
+    </div>
+    <p class="cs-lessons-desc">Designing the blood request post taught me to put the most critical details first, so people can act in seconds.</p>
+  </div>
+
+</div>
+
+<div class="work-line-full reveal" data-reveal="fade"></div>
+
+<!-- ================= Start A Project (Contact) ================= -->
+<section class="contact" id="contact">
+
+  <div class="contact-header reveal" data-reveal="up">
+    <h2 class="contact-title">Thanks for Reading Until the next one.</h2>
+    <p class="contact-subtitle">If CSE Connect made you curious about how it was built, or you're working on something that could use a similar hand - I'd love to hear from you.</p>
+  </div>
+
+  <div class="work-line-full reveal" data-reveal="fade" style="--reveal-delay: 100ms"></div>
+
+  <div class="contact-card reveal" data-reveal="up" style="--reveal-delay: 150ms">
+    <h3 class="contact-card-title">Say Hello..!</h3>
+
+    <form class="contact-form" id="contactForm" novalidate>
+
+      <p class="contact-line">
+        Hello Ieamin, myself
+        <input
+          type="text"
+          name="name"
+          id="contactName"
+          class="contact-input contact-input--inline"
+          placeholder="your full name..."
+          autocomplete="name"
+          required
+        >
+      </p>
+
+      <p class="contact-line contact-line--block">
+        and I am looking for someone to help me. I am giving you a short description about my project:
+      </p>
+      <textarea
+        name="description"
+        id="contactDescription"
+        class="contact-input contact-input--block"
+        placeholder="short description of your project..."
+        rows="1"
+        required
+      ></textarea>
+
+      <p class="contact-line contact-line--block">
+        I am giving you my E-mail address to connect with me.
+      </p>
+      <input
+        type="email"
+        name="email"
+        id="contactEmail"
+        class="contact-input contact-input--block"
+        placeholder="your Gmail account"
+        autocomplete="email"
+        required
+      >
+
+      <p class="contact-form-note" id="contactFormNote" aria-live="polite"></p>
+
+      <button type="submit" class="btn btn-primary glass-sweep contact-submit" id="contactSubmit">
+        Send
+      </button>
+
+    </form>
+  </div>
+
+</section>
+
+<!-- ================= Footer ================= -->
+<footer class="site-footer" id="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+      <div class="footer-col footer-col--contacts reveal" data-reveal="up" style="--reveal-delay: 0ms">
+        <h4 class="footer-heading">Contacts</h4>
+
+        <ul class="footer-contact-list">
+
+          <li class="footer-contact-item reveal" data-reveal="up" style="--reveal-delay: 60ms">
+            <span class="footer-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3.5 2h2.2l1 3-1.4 1.1a8.5 8.5 0 0 0 3.6 3.6L10 8.3l3 1v2.2c0 .7-.6 1.3-1.3 1.2C6.7 12.3 3.7 9.3 3.3 4.3 3.2 3.6 2.8 2 3.5 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="footer-contact-text">
+              <span class="footer-contact-label">Mobile No:</span>
+              <a class="footer-contact-value" href="tel:+8801998679068">+8801 99867 9068</a>
+            </span>
+          </li>
+
+          <li class="footer-contact-item reveal" data-reveal="up" style="--reveal-delay: 120ms">
+            <span class="footer-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 2.5a5.5 5.5 0 0 0-4.7 8.3L2.5 13.5l2.8-.8A5.5 5.5 0 1 0 8 2.5Z" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M5.8 5.9c.2-.4.5-.4.7-.4h.5c.2 0 .4 0 .5.4l.3.9c0 .2 0 .3-.1.4l-.4.5c-.1.1-.1.3 0 .4.4.7 1 1.3 1.7 1.7.1.1.3.1.4 0l.5-.4c.1-.1.2-.1.4-.1l.9.3c.3.1.4.3.4.5v.5c0 .3-.2.6-.5.7-1.7.5-4-.7-5.1-1.8C4.9 8.9 3.7 6.6 4.2 4.9c.1-.3.4-.5.7-.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="footer-contact-text">
+              <span class="footer-contact-label">WhatsApp:</span>
+              <a class="footer-contact-value" href="https://wa.me/8801640830345" target="_blank" rel="noopener">+8801 64083 0345</a>
+            </span>
+          </li>
+
+          <li class="footer-contact-item reveal" data-reveal="up" style="--reveal-delay: 180ms">
+            <span class="footer-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <rect x="2" y="3.5" width="12" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M2.5 4.2 8 8.5l5.5-4.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="footer-contact-text">
+              <span class="footer-contact-label">E-mail:</span>
+              <a class="footer-contact-value" href="mailto:ieaminislamsifat12@gmail.com">ieaminislamsifat12@gmail.com</a>
+            </span>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="footer-col reveal" data-reveal="up" style="--reveal-delay: 90ms">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#about">About me</a></li>
+          <li><a href="index.html#process">Working Process</a></li>
+          <li><a href="index.html#work">Projects</a></li>
+          <li><a href="index.html#services">Services</a></li>
+        </ul>
+        
+      </div>
+
+      <div class="footer-col reveal" data-reveal="up" style="--reveal-delay: 180ms">
+        <h4 class="footer-heading">Social Media</h4>
+        <ul class="footer-links">
+          <li><a href="https://www.linkedin.com/in/ieamin-islam-sifat/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.behance.net/ieaminsifat47" target="_blank" rel="noopener">Behance</a></li>
+          <li><a href="https://www.facebook.com/ieamin.sifat" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+
+      <button class="footer-top-btn reveal" data-reveal="fade" style="--reveal-delay: 260ms" id="backToTopBtn" type="button" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+          <path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <div class="footer-divider reveal" data-reveal="fade" style="--reveal-delay: 100ms"></div>
+
+    <div class="footer-bottom reveal" data-reveal="up" style="--reveal-delay: 100ms">
+      <p>&copy; <span id="footerYear">2025</span> - Ieamin Islam Sifat. All rights reserved.</p>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/case_study_motion.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/responsive.js"></script>
+<script>
+  function csGoBack() {
+    if (document.referrer && document.referrer.includes(window.location.host)) {
+      history.back();
+    } else {
+      window.location.href = 'index.html#works';
+    }
+  }
+  document.getElementById('csBackBtn').addEventListener('click', csGoBack);
+
+  const csBackBtnMobile = document.getElementById('csBackBtnMobile');
+  if (csBackBtnMobile) {
+    csBackBtnMobile.addEventListener('click', csGoBack);
+  }
+</script>
+<script src="js/contact_footer.js"></script>
+
+</body>
+</html>
